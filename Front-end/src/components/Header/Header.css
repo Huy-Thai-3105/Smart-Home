@@ -1,0 +1,29 @@
+.element {
+    all: none;
+  }
+
+.container {
+    width: 98%;
+    height: 80px;
+    background-color: whitesmoke ;
+    display: flex;
+    flex-direction: row; 
+    align-content: space-between;
+    /*  align-items: center; */
+    margin: 15px ;
+    border-radius: 10px;
+}
+
+.logo_contain {
+    width: 250px;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-between;
+}
+
+img {
+    height: 60px;
+    width: 60px;
+}
