@@ -8,11 +8,11 @@ h2{
 .page{
     display: flex;
     flex-direction: row; 
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
-.container {
-    width: 98%;
+.container_header {
+    width: 90%;
     height: 80px;
     background-color: white ;
     display: flex;
@@ -24,7 +24,7 @@ h2{
 }
 
 .logo_contain {
-    width: 150px;
+    width: 170px;
     height: 60px;
     display: flex;
     flex-direction: row;

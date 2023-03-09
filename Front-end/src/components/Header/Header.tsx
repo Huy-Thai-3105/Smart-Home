@@ -4,7 +4,7 @@ import "./Header.css"
 export default function Header() {
   return (
     <div className="page">
-        <div className="container">
+        <div className="container_header">
           <div className="logo_contain">
               <img src="./logo.png"></img>
               <h2>My Home</h2>

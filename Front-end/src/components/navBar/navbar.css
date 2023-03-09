@@ -2,7 +2,8 @@
     display: flex; 
     flex-direction: row;
     justify-content: flex-start;
-    gap : 100px
+    gap : 100px;
+    align-items: center;
 }
 .p_size{
     font-size: 20px;
