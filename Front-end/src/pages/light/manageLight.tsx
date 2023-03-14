@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "../../style/light.css"
 import Header from '../../components/Header/Header'
 import Navbar from '../../components/navBar/Navbar'
@@ -8,9 +8,49 @@ import Table from '../../components/Table/Table'
 import { Toggle } from '../../components/Button/ToggleButton'
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios'
 import Search from '../../components/SearchBar/SearchBar'
 
 export default function Light() {
+    const [lightList , setLightList] = React.useState("") ; 
+    const [toggleStatus, setToggleStatus] = React.useState("false")
+    const [status, setStatus] = React.useState("") ; 
+    const [idStatus, setIdStatus] = React.useState("") ; 
+    React.useEffect(() => {
+        const getAllLight = async () => {
+            const resp = await fetch(`http://localhost:3000/light/all`);
+            
+            if (!resp.ok) {
+                alert("Something wrong")
+            }
+            
+            const json = await resp.json();
+            if (json["result"] == "success") setLightList(json["lights"]) 
+            console.log(lightList);
+            }
+        getAllLight();
+        },[])
+        
+
+    React.useEffect(() => {
+        const updateStatus = async (idStatus) => {
+            const data = ({
+                "Devicename": "",
+                "Device_Status": status,
+                "RoomID": ""
+            });
+            console.log(data)
+            const config = {
+                method: "patch",
+                url: `http://localhost:3000/light/${idStatus}`,
+                data: data,
+            };
+            const response = await axios(config);
+                console.log(response);
+            };           
+            console.log(idStatus)
+            updateStatus(idStatus);
+        }, [idStatus]);
     const logState = state => {
         console.log("Toggled:", state)
     }
@@ -56,36 +96,38 @@ export default function Light() {
                                 <th>User</th>
                                 <th>Day Add</th>
                                 <th>Status</th>
+                                <th>Mode</th>
                                 <th>Remove</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td className='color_blue'>Light 1</td>
-                                <td>HUFR48S</td>
-                                <td>Thái</td>
-                                <td>03-08-2023</td>
-                                <td>
-                                    <Toggle
-                                    toggled={true}
-                                    onClick={logState}/>
-                                </td>
-                                <td><FontAwesomeIcon icon={faTrash}/></td>
-                            </tr>
-                            <tr>
-                                <td className='color_blue'>Light 2</td>
-                                <td>HUFR486</td>
-                                <td>Thái</td>
-                                <td>03-08-2023</td>
-                                <td>
-                                    <Toggle
-                                    toggled={false}
-                                    onClick={logState}/>
-                                </td>
-                                <td>
-                                <FontAwesomeIcon icon={faTrash}/>
-                                </td>
-                            </tr>
+                            {Array.isArray(lightList)  && lightList.map((info) => (
+    
+                                <tr key={info.ID}>
+                                    <td className='color_blue'>{info.Devicename}</td>
+            
+                                    <td>{info.ID}</td>
+                                    <td>Thái</td>
+                                    <td >03-08-2023</td>
+                                    <td onClick = {() => {
+                                        setIdStatus(info.ID);
+                                        if (info.Device_Status === "on") setStatus("off")
+                                        else setStatus("on")
+                                    }}>
+                                        {/* check = {()=> {
+                                            if (info.Device_Status == "on") setToggleStatus("true")
+                                            else setToggleStatus("false")
+                                        }}
+                                         */}
+                                         <Toggle
+                                        toggled= {true}
+                                        onClick={logState}/>
+                                        {info.Device_Status }
+                                    </td>
+                                    <td>{info.Mode}</td>
+                                    <td><FontAwesomeIcon icon={faTrash}/></td>
+                                </tr>
+                        ))} 
                         </tbody>
                     </Table>
                 </div>
