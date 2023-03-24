@@ -1,17 +1,27 @@
-import { useState } from 'react'
-import "./ToggleButton.css"
+import React, { useState } from 'react'
+import './ToggleButton.css'
 export const Toggle = ({ toggled, onClick }) => {
-    const [isToggled, toggle] = useState(toggled)
+  const [isToggled, setToogled] = React.useState(false)
 
-    const callback = () => {
-        toggle(!isToggled)
-        onClick(!isToggled)
-    }
+  React.useEffect(() => {
+    if (toggled == 'on') setToogled(true)
+    console.log(isToggled)
+  }, [toggled])
 
-    return (
-        <label>
-            <input type="checkbox" defaultChecked={isToggled} onClick={callback} />
-            <span />
-        </label>
-    )
+  const callback = () => {
+    setToogled(!isToggled)
+    onClick(!isToggled)
+  }
+
+  return (
+    <label className="label">
+      <input
+        className="input__"
+        type="checkbox"
+        checked={isToggled}
+        onClick={callback}
+      />
+      <span className="span__" />
+    </label>
+  )
 }

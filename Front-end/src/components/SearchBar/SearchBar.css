@@ -1,18 +1,18 @@
 .container {
-    width: fit-content;
-    height: fit-content;
-    position: relative;
-  }
-  
-  .SearchbarInput {
-    padding-left: 40px;
-  }
-  
-  .iconSearch {
-    height: 20px;
-  
-    position: absolute;
-    margin: auto 10px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+
+.SearchbarInput {
+  padding-left: 40px;
+}
+
+.iconSearch {
+  height: 20px;
+
+  position: absolute;
+  margin: auto 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
