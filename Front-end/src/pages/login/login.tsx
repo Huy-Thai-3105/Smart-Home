@@ -11,10 +11,10 @@ export default class Login extends Component {
     return (
       <div className="container">
         <div className="login__container">
-          <div className="logo">
+          {/* <div className="logo">
             <img src="../logo.png" className="img_size"></img>
             <h1 className="h1_font">My Home</h1>
-          </div>
+          </div> */}
           <p className="p__size">Login</p>
           <p className="title__">
             Welcome to My house! Please enter your details.

@@ -5,7 +5,7 @@ import './SideBar.css'
 export default function SideBar() {
   return (
     <div className="contain_nav">
-      <Navbar name="Room" src="./home.png" link="/" />
+      <Navbar name="Room" src="./home.png" link="/room" />
       <Navbar name="Light" src="./light.png" link="/light" />
       <Navbar name="Air condition" src="./airCondition.png" link="/air" />
       <Navbar name="Door" src="./door.png" link="/door" />

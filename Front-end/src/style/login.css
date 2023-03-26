@@ -1,7 +1,7 @@
-.container {
+#root {
   width: 100%;
   height: 100vh;
-  background-image: url('../smarthome.jpg');
+  background-image: url('../smarthome3.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -27,12 +27,12 @@
 
 .login__container {
   position: fixed;
-  right: 8%;
+  right: 30%;
   width: 35%;
-  height: 80%;
+  height: 50%;
   background-color: white;
   border-radius: 20px;
-  top: 10%;
+  top: 15%;
   display: flex;
   flex-direction: column;
   padding: 40px;

@@ -1,6 +1,8 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import Form from '../../Form/Form'
+import BlueButton from '../../Button/BlueButton'
+import InputBlue from '../../InputBox/InputBlue'
+import RedButton from '../../Button/RedButton'
 
 export default function ModalCreate(props: {
   displayModal: boolean
@@ -11,17 +13,26 @@ export default function ModalCreate(props: {
       displayModal={props.displayModal}
       setDisplayModal={props.setDisplayModal}
     >
-      <div className="window grow p-4">
-        <button
-          onClick={() => {
-            //   if (result === "fail")
-            props.setDisplayModal(false)
-          }}
-          type="button"
-          className="basis-1/3 bg-black text-white"
-        >
-          Add new
-        </button>
+      <div className="window grow p-4 ">
+        <InputBlue label="Air condition name"></InputBlue>
+        <InputBlue label="Air condition code"></InputBlue>
+        <br></br>
+        <div className="Row">
+          <RedButton
+            onClick={() => {
+              props.setDisplayModal(false)
+            }}
+          >
+            Close
+          </RedButton>
+          <BlueButton
+            onClick={() => {
+              props.setDisplayModal(false)
+            }}
+          >
+            Add Air Condition
+          </BlueButton>
+        </div>
       </div>
     </Form>
   )
