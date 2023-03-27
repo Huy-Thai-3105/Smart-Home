@@ -6,23 +6,28 @@
     justify-content: flex-end;
 }
 
-.contain_content {
+.contain__room {
     /* width: 91.5%; */
     background-color: white;
     height: 600px;
     margin-right: 5%;
     margin-left: 2%;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap ;
     border-radius: 15px;
     padding: 40px;
+    gap: 40px;
 
 }
 
-.room {
-    width: 300px;
-    height: 300px;
-    background-color: white;
-    border: solid;
+.row_contain { 
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+   
 }
+
+

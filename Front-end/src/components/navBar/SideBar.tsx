@@ -11,7 +11,7 @@ export default function SideBar() {
       <Navbar name="Door" src="./door.png" link="/door" />
       <Navbar name="Water tree" src="./pump.png" link="/pump" />
       <Navbar name="Account" src="./setting.png" link="/account" />
-      <Navbar name="Logout" src="./logout.png" link="/logout" />
+      <Navbar name="Logout" src="./logout.png" link="/login" />
     </div>
   )
 }

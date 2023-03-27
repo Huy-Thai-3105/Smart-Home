@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import BlueButton from '../../components/Button/BlueButton'
-import Button from '../../components/Button/BlueButton'
-import RedButton from '../../components/Button/RedButton'
 import InputBlue from '../../components/InputBox/InputBlue'
-import InputPink from '../../components/InputBox/InputPink'
 import '../../style/login.css'
 
 export default class Login extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container_body">
         <div className="login__container">
           {/* <div className="logo">
             <img src="../logo.png" className="img_size"></img>
@@ -19,8 +16,8 @@ export default class Login extends Component {
           <p className="title__">
             Welcome to My house! Please enter your details.
           </p>
-          <InputBlue label="Username"></InputBlue>
-          <InputBlue label="Password"></InputBlue>
+          <InputBlue label="Username" type="text"></InputBlue>
+          <InputBlue label="Password" type="password"></InputBlue>
           <a className="a__" href="./login">
             Forgot Password
           </a>
