@@ -5,7 +5,6 @@ export const Toggle = ({ toggled, onClick }) => {
 
   React.useEffect(() => {
     if (toggled == 'on') setToogled(true)
-    console.log(isToggled)
   }, [toggled])
 
   const callback = () => {
@@ -14,7 +13,7 @@ export const Toggle = ({ toggled, onClick }) => {
   }
 
   return (
-    <label className="label">
+    <label className="label__">
       <input
         className="input__"
         type="checkbox"
