@@ -1,0 +1,13 @@
+.contain_nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 23%;
+  margin-left: 5%;
+  background-color: white;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+}
