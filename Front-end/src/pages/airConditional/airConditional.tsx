@@ -47,75 +47,77 @@ export default function AirConditional() {
   }, [idStatus])
 
   return (
-    <div className="contain_content">
-      <AddAir displayModal={displayModal} setDisplayModal={setDisplayModal} />
-      <div className="row2">
-        <div className="row2_1">
-          <div>
-            <nav>
-              <ul className="list">
-                <li className="items">Device</li>
-                <li className="items">History</li>
-                <li className="items">Dashboard</li>
-              </ul>
-            </nav>
+    <div className="contain">
+      <div className="contain_content">
+        <AddAir displayModal={displayModal} setDisplayModal={setDisplayModal} />
+        <div className="row2">
+          <div className="row2_1">
+            <div>
+              <nav>
+                <ul className="list">
+                  <li className="items">Device</li>
+                  <li className="items">History</li>
+                  <li className="items">Dashboard</li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <div className="line">Air conditon is running :</div>
+          <div className="row2_1">
+            <Button>Air condition List</Button>
+            <Button>Air condition On</Button>
+            <RedButton
+              onClick={() => {
+                setDisplayModal(true)
+              }}
+            >
+              Add new
+            </RedButton>
           </div>
         </div>
-        <div className="line">Air conditon is running :</div>
-        <div className="row2_1">
-          <Button>Air condition List</Button>
-          <Button>Air condition On</Button>
-          <RedButton
-            onClick={() => {
-              setDisplayModal(true)
-            }}
-          >
-            Add new
-          </RedButton>
+
+        <div className="row3">
+          <Table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Temprature </th>
+                <th>Humidity</th>
+                <th>User</th>
+                <th>Status</th>
+                <th>Mode</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Array.isArray(AirList) &&
+                AirList.map((info) => (
+                  <tr key={info.ID}>
+                    <td className="color_blue">{info.Devicename}</td>
+
+                    <td>{info.ID}</td>
+                    <td className="color_blue"> {info.Temperature}</td>
+                    <td className="color_red"> {info.Humidity}</td>
+                    <td>Thái</td>
+                    <td
+                      onClick={() => {
+                        setIdStatus(info.ID)
+                        if (info.Device_Status === 'on') setStatus('off')
+                        else setStatus('on')
+                      }}
+                    >
+                      <Toggle toggled={info.Device_Status} onClick={true} />
+                    </td>
+                    <td>{info.Mode}</td>
+                    <td>
+                      <FontAwesomeIcon icon={faTrash} />
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
         </div>
-      </div>
-
-      <div className="row3">
-        <Table>
-          <thead>
-            <tr>
-              <th>Air condition Name</th>
-              <th>Code</th>
-              <th>Temprature </th>
-              <th>Humidity</th>
-              <th>User</th>
-              <th>Status</th>
-              <th>Mode</th>
-              <th>Remove</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.isArray(AirList) &&
-              AirList.map((info) => (
-                <tr key={info.ID}>
-                  <td className="color_blue">{info.Devicename}</td>
-
-                  <td>{info.ID}</td>
-                  <td className="color_blue"> {info.Temperature}</td>
-                  <td className="color_red"> {info.Humidity}</td>
-                  <td>Thái</td>
-                  <td
-                    onClick={() => {
-                      setIdStatus(info.ID)
-                      if (info.Device_Status === 'on') setStatus('off')
-                      else setStatus('on')
-                    }}
-                  >
-                    <Toggle toggled={info.Device_Status} onClick={true} />
-                  </td>
-                  <td>{info.Mode}</td>
-                  <td>
-                    <FontAwesomeIcon icon={faTrash} />
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </Table>
       </div>
     </div>
   )

@@ -30,7 +30,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="/account" element={<Account />}></Route>
         </Route>
       </Routes>
-      {/* </div> */}
     </BrowserRouter>
     {/* </UserProvider> */}
   </React.StrictMode>

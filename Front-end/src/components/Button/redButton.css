@@ -29,7 +29,7 @@
 }
 
 .button-red:hover {
-  background-color: #0069d9;
+  background-color: red;
 }
 
 .button-red:focus {
@@ -38,13 +38,13 @@
 }
 
 .button-red:disabled {
-  background-color: blue;
+  background-color: red;
   border-color: rgba(27, red1, red5, 0.1);
   color: rgba(255, 255, 255, 0.8);
   cursor: default;
 }
 
 .button-red:active {
-  background-color: blue;
+  background-color: red;
   box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
 }

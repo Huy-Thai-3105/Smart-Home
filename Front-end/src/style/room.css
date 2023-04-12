@@ -1,15 +1,7 @@
-.contain {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
 .contain__room {
   /* width: 91.5%; */
+  width: 80%;
   background-color: white;
-  height: 600px;
   margin-right: 5%;
   margin-left: 2%;
   display: flex;

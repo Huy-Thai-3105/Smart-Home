@@ -2,13 +2,6 @@
   background-color: whitesmoke;
 }
 
-.contain {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
 .row1 {
   display: flex;
   flex-direction: row;
