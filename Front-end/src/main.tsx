@@ -21,17 +21,15 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Routes>
         <Route index path="/login" element={<Login />}></Route>
         <Route path="/" element={<App />}>
-          <Route path="/room" element={<Room/>}></Route>
+          <Route path="/room" element={<Room />}></Route>
           <Route path="/light" element={<ManageLight />}></Route>
           <Route path="/lightChart" element={<LightDashboard />}></Route>
           <Route path="/air" element={<AirConditonal />}></Route>
-          <Route path="/door" element={<Door/>}></Route>
-          <Route path="/pump" element={<Pump/>}></Route>
-          <Route path="/account" element={<Account/>}></Route>
-
+          <Route path="/door" element={<Door />}></Route>
+          <Route path="/pump" element={<Pump />}></Route>
+          <Route path="/account" element={<Account />}></Route>
         </Route>
       </Routes>
-      {/* </div> */}
     </BrowserRouter>
     {/* </UserProvider> */}
   </React.StrictMode>

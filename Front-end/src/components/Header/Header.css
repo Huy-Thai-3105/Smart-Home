@@ -21,7 +21,7 @@ h2 {
   align-items: center;
   margin: 15px;
   border-radius: 10px;
-  margin-top: 50px;
+  margin-top: 4%;
 }
 
 .logo_contain {
@@ -43,9 +43,4 @@ h2 {
   justify-content: space-between;
   align-items: center;
   margin-right: 20px;
-}
-
-img {
-  height: 40px;
-  width: 40px;
 }

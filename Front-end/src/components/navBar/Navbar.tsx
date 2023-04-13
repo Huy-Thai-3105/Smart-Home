@@ -25,7 +25,7 @@ export default function Navbar({ name, src, link }) {
           routeChange()
         }}
       >
-        <img src={src}></img>
+        <img className="img__1" src={src}></img>
         <p className="p_size">{name}</p>
       </div>
     </div>

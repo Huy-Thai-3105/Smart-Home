@@ -15,9 +15,13 @@ export default function LightDashboard() {
           <div>
             <nav>
               <ul className="list">
-                <li className="items">Device</li>
+                <li className="items">
+                  <a href="./light">Device</a>
+                </li>
                 <li className="items">History</li>
-                <li className="items">Dashboard</li>
+                <li className="items">
+                  <a href="./lightChart">Dashboard</a>
+                </li>
               </ul>
             </nav>
           </div>

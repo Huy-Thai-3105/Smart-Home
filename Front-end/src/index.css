@@ -28,7 +28,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 20px;
+    gap: 30px;
   }
   .content_window .content_window {
     @apply flex-grow;
@@ -56,17 +56,6 @@
     @apply drop-shadow-lg;
   }
 
-  input {
-    @apply rounded-md;
-    @apply my-2 px-4 py-2;
-    @apply rounded border-2 border-gray-200;
-    @apply hover:scale-105;
-    @apply active:border-solid;
-    @apply transition-all;
-    @apply focus:outline-none;
-    @apply focus:bg-white;
-  }
-
   .react-calendar button {
     @apply hover:scale-105;
   }
@@ -75,3 +64,26 @@
 .display__flex {
   display: flex;
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+.contain {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.img__1 {
+  height: 40px;
+  width: 40px;
+}
+/* #root{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */

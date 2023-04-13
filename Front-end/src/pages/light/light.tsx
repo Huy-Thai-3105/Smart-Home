@@ -14,7 +14,7 @@ export default function Light() {
   const [status, setStatus] = React.useState('')
   const [idStatus, setIdStatus] = React.useState('')
   const [displayModal, setDisplayModal] = React.useState(false)
-
+  const [deleteId, setDeleteId] = React.useState('')
   React.useEffect(() => {
     const getAllLight = async () => {
       const resp = await fetch(`http://localhost:3000/light/all`)
@@ -46,6 +46,15 @@ export default function Light() {
     updateStatus(idStatus)
   }, [idStatus])
 
+  React.useEffect(() => {
+    async function deleteLight() {
+      await fetch(`http://localhost:3000/light/${deleteId}`, {
+        method: 'DELETE',
+      })
+    }
+    console.log('DELETE DEVICE')
+    deleteLight()
+  }, [deleteId])
   return (
     <div className="contain">
       <AddLightModal
@@ -58,9 +67,13 @@ export default function Light() {
             <div>
               <nav>
                 <ul className="list">
-                  <li className="items">Device</li>
+                  <li className="items">
+                    <a href="./light">Device</a>
+                  </li>
                   <li className="items">History</li>
-                  <li className="items">Dashboard</li>
+                  <li className="items">
+                    <a href="./lightChart">Dashboard</a>
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -112,7 +125,12 @@ export default function Light() {
                       <Toggle toggled={info.Device_Status} onClick={true} />
                     </td>
                     <td>{info.Mode}</td>
-                    <td>
+                    <td
+                      className="pointer"
+                      onClick={() => {
+                        setDeleteId(info.ID)
+                      }}
+                    >
                       <FontAwesomeIcon icon={faTrash} />
                     </td>
                   </tr>

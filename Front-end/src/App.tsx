@@ -6,10 +6,12 @@ import SideBar from './components/navBar/SideBar'
 export default function App() {
   return (
     <div>
-      <Header />
-      <div className="display__flex">
-        <SideBar />
-        <Outlet />
+      <div>
+        <Header />
+        <div className="display__flex">
+          <SideBar />
+          <Outlet />
+        </div>
       </div>
     </div>
   )
