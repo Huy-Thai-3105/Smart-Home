@@ -38,7 +38,7 @@ export default function AirConditional() {
       }
       const config = {
         method: 'patch',
-        url: `http://localhost:3000/airCondition/${idStatus}`,
+        url: `http://localhost:3000/device/turn/${idStatus}`,
         data: data,
       }
       const response = await axios(config)
@@ -53,11 +53,15 @@ export default function AirConditional() {
         <div className="row2">
           <div className="row2_1">
             <div>
-              <nav>
+            <nav>
                 <ul className="list">
-                  <li className="items">Device</li>
+                  <li className="items">
+                    <a href="./air">Device</a>
+                  </li>
                   <li className="items">History</li>
-                  <li className="items">Dashboard</li>
+                  <li className="items">
+                    <a href="./airChart">Dashboard</a>
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -97,8 +101,8 @@ export default function AirConditional() {
                     <td className="color_blue">{info.Devicename}</td>
 
                     <td>{info.ID}</td>
-                    <td className="color_blue"> {info.Temperature}</td>
-                    <td className="color_red"> {info.Humidity}</td>
+                    <td className="color_blue"> {info.Temperature_D}</td>
+                    <td className="color_red"> {info.Humidity_D}</td>
                     <td>Thái</td>
                     <td
                       onClick={() => {
