@@ -7,7 +7,36 @@ import BlueButton from '../../components/Button/BlueButton'
 import ChangePassword from '../../components/Modal/ChangePassword/ChangePassword'
 export default function Account() {
   const [displayModal, setDisplayModal] = React.useState(false)
-  const [firstName, setFirstName] = React.useState('Trương Huy')
+  const [firstName, setFirstName] = React.useState("")
+  const [lastName, setLastName] = React.useState("")
+  const [ssn, setSSN] = React.useState("")
+  const [email, setEmail] = React.useState("")
+  const [phone,setPhone] = React.useState("")
+  const [district,setDistric] = React.useState("")
+  const [city,setCity] = React.useState("")
+
+  React.useEffect(() => {
+    const getInfomation = async () => {
+      const resp = await fetch(`http://localhost:3000/user/3`)
+
+      if (!resp.ok) {
+        alert('Something wrong')
+      }
+
+      const json = await resp.json()
+      let info = json["user"]
+      setFirstName(info["FName"])
+      setLastName(info["LName"])
+      setSSN(info["SSN"])
+      setCity(info["City"])
+      setPhone(info["SSN"])
+      setDistric(info["District"])
+      setEmail(info["Email"])
+
+
+    }
+    getInfomation()
+  }, [])
 
   return (
     <div className="contain">
@@ -34,29 +63,36 @@ export default function Account() {
               label="Last name"
               type="text"
               value="Thái"
+              onChange={(e) => setLastName(e.target.value)}
+
             ></Input_nomal>
           </div>
           <Input_nomal label="SSN" type="text" value="2012036"></Input_nomal>
           <Input_nomal
             label="Email"
             type="text"
-            value="huythai31052002@gmai.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           ></Input_nomal>
           <Input_nomal
             label="Contact number"
             type="text"
-            value="0348273185"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           ></Input_nomal>
           <div className="flex gap-5">
             <Input_nomal
               label="District"
               type="text"
-              value="Go Vap"
+              value={district}
+              onChange={(e) => setDistric(e.target.value)}
+
             ></Input_nomal>
             <Input_nomal
               label="City"
               type="text"
-              value="HCM city"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
             ></Input_nomal>
           </div>
           <br />

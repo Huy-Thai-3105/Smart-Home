@@ -8,6 +8,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import AddLightModal from '../../components/Modal/LightModal/AddLight'
+import { CredentialsInterface, UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Light() {
   const [lightList, setLightList] = React.useState('')
@@ -15,6 +17,14 @@ export default function Light() {
   const [idStatus, setIdStatus] = React.useState('')
   const [displayModal, setDisplayModal] = React.useState(false)
   const [deleteId, setDeleteId] = React.useState('')
+
+  const {id, accessToken, userRole } = React.useContext<CredentialsInterface>(UserContext);
+  const navi = useNavigate();
+  console.log(userRole)
+  // if (userRole !== "role") {
+  //   navi("/login");
+  // }
+
   React.useEffect(() => {
     const getAllLight = async () => {
       const resp = await fetch(`http://localhost:3000/light/all`)
@@ -29,6 +39,7 @@ export default function Light() {
     getAllLight()
   }, [])
 
+ 
   React.useEffect(() => {
     const updateStatus = async (idStatus) => {
       const data = {
@@ -38,7 +49,7 @@ export default function Light() {
       }
       const config = {
         method: 'patch',
-        url: `http://localhost:3000/light/${idStatus}`,
+        url: `http://localhost:3000/device/turn/${idStatus}`,
         data: data,
       }
       const response = await axios(config)
@@ -52,6 +63,7 @@ export default function Light() {
         method: 'DELETE',
       })
     }
+    
     console.log('DELETE DEVICE')
     deleteLight()
   }, [deleteId])
@@ -142,3 +154,7 @@ export default function Light() {
     </div>
   )
 }
+function navi(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
