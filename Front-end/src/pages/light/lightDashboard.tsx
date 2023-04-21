@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import '../../style/light.css'
-import Button from '../../components/Button/BlueButton'
-import RedButton from '../../components/Button/RedButton'
-import Table from '../../components/Table/Table'
-import axios from 'axios'
-import Search from '../../components/SearchBar/SearchBar'
-import Chart from '../../components/Chart/Chart'
+
+import Barchart_light from '../../components/Chart/barchart'
 
 export default function LightDashboard() {
   return (
@@ -32,7 +28,7 @@ export default function LightDashboard() {
       </div>
 
       <div className="row3">
-        <Chart></Chart>
+        <Barchart_light></Barchart_light>
       </div>
     </div>
   )

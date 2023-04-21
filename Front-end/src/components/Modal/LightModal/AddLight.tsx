@@ -17,7 +17,7 @@ export default function ModalCreate(props: {
 
   React.useEffect(() => {
     const getRoom = async () => {
-      const resp = await fetch(`http://localhost:3000/room/all`)
+      const resp = await fetch(`http://localhost:3000/room/all/2`)
 
       if (!resp.ok) {
         alert('Something wrong')

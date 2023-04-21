@@ -7,7 +7,7 @@ import { Toggle } from '../../components/Button/ToggleButton'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
-import AddLightModal from '../../components/Modal/LightModal/AddLight'
+import AddLightModal from "../../components/Modal/LightModal/AddLight"
 import { CredentialsInterface, UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
@@ -17,8 +17,10 @@ export default function Light() {
   const [idStatus, setIdStatus] = React.useState('')
   const [displayModal, setDisplayModal] = React.useState(false)
   const [deleteId, setDeleteId] = React.useState('')
+  const [numLightOn, setNumLightOn] = React.useState(0)
 
   const {id, accessToken, userRole } = React.useContext<CredentialsInterface>(UserContext);
+
   const navi = useNavigate();
   console.log(userRole)
   // if (userRole !== "role") {
@@ -35,37 +37,42 @@ export default function Light() {
 
       const json = await resp.json()
       if (json['result'] == 'success') setLightList(json['lights'])
+      setNumLightOn(json['light'].filter((light : any) => light.Device_Status == 'on').length);
     }
     getAllLight()
   }, [])
 
  
   React.useEffect(() => {
-    const updateStatus = async (idStatus) => {
-      const data = {
-        Devicename: '',
-        Device_Status: status,
-        RoomID: '',
+    if (idStatus){     
+      const updateStatus = async (idStatus) => {
+        const data = {
+          Devicename: '',
+          Device_Status: status,
+          RoomID: '',
+        }
+        const config = {
+          method: 'patch',
+          url: `http://localhost:3000/device/turn/${idStatus}`,
+          data: data,
+        }
+        const response = await axios(config)
       }
-      const config = {
-        method: 'patch',
-        url: `http://localhost:3000/device/turn/${idStatus}`,
-        data: data,
-      }
-      const response = await axios(config)
+      updateStatus(idStatus)
     }
-    updateStatus(idStatus)
   }, [idStatus])
 
   React.useEffect(() => {
-    async function deleteLight() {
-      await fetch(`http://localhost:3000/light/${deleteId}`, {
-        method: 'DELETE',
-      })
+    if (deleteId){
+      async function deleteLight() {
+        await fetch(`http://localhost:3000/light/${deleteId}`, {
+          method: 'DELETE',
+        })
+      }
+      
+      console.log('DELETE DEVICE')
+      deleteLight()
     }
-    
-    console.log('DELETE DEVICE')
-    deleteLight()
   }, [deleteId])
   return (
     <div className="contain">
@@ -82,7 +89,9 @@ export default function Light() {
                   <li className="items">
                     <a href="./light">Device</a>
                   </li>
-                  <li className="items">History</li>
+                  <li className="items">
+                    <a href='lightHistory'>History</a>  
+                  </li>
                   <li className="items">
                     <a href="./lightChart">Dashboard</a>
                   </li>
@@ -91,7 +100,7 @@ export default function Light() {
             </div>
           </div>
           <div className="row2_1">
-            <p className="line"> Number light is on : </p>
+            <p className="line"> Number light is on : {numLightOn} </p>
           </div>
           <div className="row2_1">
             <Button>Light List</Button>
@@ -154,7 +163,3 @@ export default function Light() {
     </div>
   )
 }
-function navi(arg0: string) {
-  throw new Error('Function not implemented.')
-}
-

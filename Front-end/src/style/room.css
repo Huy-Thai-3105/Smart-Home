@@ -1,15 +1,20 @@
-.contain__room {
-  /* width: 91.5%; */
+.contain__allRoom{
   width: 80%;
   background-color: white;
   margin-right: 5%;
   margin-left: 2%;
+  border-radius: 15px;
+}
+.contain__room {
+  /* width: 91.5%; */
+  width: 90%;
+  background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  border-radius: 15px;
+  
   padding: 40px;
   gap: 40px;
 }
@@ -18,4 +23,12 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+  gap : 20px;
+}
+
+.select_size{
+  width: 30%;
 }

@@ -13,6 +13,7 @@ import Door from './pages/door/door'
 import Pump from './pages/pump/pump'
 import Account from './pages/account/account'
 import AirDashboard from './pages/airConditional/airDashboard'
+import LightHistory from './pages/light/lightHistory'
 //import UserProvider, { UserContext } from "./context/UserContext";
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="/room" element={<Room />}></Route>
           <Route path="/light" element={<ManageLight />}></Route>
           <Route path="/lightChart" element={<LightDashboard />}></Route>
+          <Route path="/lightHistory" element={<LightHistory />}></Route>
           <Route path="/air" element={<AirConditonal />}></Route>
           <Route path="/airChart" element={<AirDashboard />}></Route>
           <Route path="/door" element={<Door />}></Route>
