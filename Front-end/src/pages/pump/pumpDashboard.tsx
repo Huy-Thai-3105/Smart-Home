@@ -6,7 +6,7 @@ import BlueButton from '../../components/Button/BlueButton'
 import RedButton from '../../components/Button/RedButton'
 import HumidityChart from '../../components/Chart/LineChartHumidity'
 
-export default function AirDashboard() {
+export default function PumpChart() {
   const [dataHis, setDataHis] = React.useState()
   const [allRoom, setAllRoom] = React.useState([])
   const [houseID, setHouseID] = React.useState('')
@@ -91,13 +91,13 @@ export default function AirDashboard() {
             <nav>
               <ul className="list">
                 <li className="items">
-                  <a href="./air">Device</a>
+                  <a href="./pump">Device</a>
                 </li>
                 <li className="items">
-                  <a href="./airHistory">History</a>
+                  <a href="./pumpHistory">History</a>
                 </li>
                 <li className="items">
-                  <a href="./airChart">Dashboard</a>
+                  <a href="./pumpChart">Dashboard</a>
                 </li>
               </ul>
             </nav>
@@ -147,7 +147,7 @@ export default function AirDashboard() {
               <p className="p_humidity">Humidity record</p>
             </div>
           </div>
-        </div>
+        </div>{' '}
       </div>
     </div>
   )

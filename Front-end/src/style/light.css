@@ -47,7 +47,7 @@
   border-radius: 15px;
   padding-top: 20px;
   padding-bottom: 50px;
-  overflow-y : scroll; 
+  overflow-y: scroll;
 }
 
 .color_blue {
@@ -92,4 +92,26 @@ nav {
 .line {
   color: #3ab840;
   font-size: 20px;
+}
+
+.p_temperature {
+  font-weight: 400;
+  color: red;
+}
+
+.p_humidity {
+  color: rgb(71, 71, 249);
+  font-weight: 400;
+}
+
+.contain_chart {
+  width: 95%;
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+}
+.chart_1 {
+  width: 100%;
+  height: 100%;
+  margin-right: 10px;
 }

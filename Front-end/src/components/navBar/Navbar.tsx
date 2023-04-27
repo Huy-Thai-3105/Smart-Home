@@ -17,7 +17,7 @@ export default function Navbar({ name, src, link }) {
   return (
     <div
       className={!active ? 'contain_element' : 'contain_element_active'}
-      onClick={toggleActive}
+      // onClick={toggleActive}
     >
       <div
         className="nav"
@@ -26,7 +26,11 @@ export default function Navbar({ name, src, link }) {
         }}
       >
         <img className="img__1" src={src}></img>
-        <p className="p_size">{name}</p>
+        {name == 'Logout' ? (
+          <p className="p_size_red">{name}</p>
+        ) : (
+          <p className="p_size">{name}</p>
+        )}
       </div>
     </div>
   )

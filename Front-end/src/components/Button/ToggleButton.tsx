@@ -4,7 +4,7 @@ export const Toggle = ({ toggled, onClick }) => {
   const [isToggled, setToogled] = React.useState(false)
 
   React.useEffect(() => {
-    if (toggled == 'on') setToogled(true)
+    if (toggled == 'on' || toggled == 'auto') setToogled(true)
   }, [toggled])
 
   const callback = () => {
@@ -19,6 +19,7 @@ export const Toggle = ({ toggled, onClick }) => {
         type="checkbox"
         checked={isToggled}
         onClick={callback}
+        onChange={() => {}}
       />
       <span className="span__" />
     </label>

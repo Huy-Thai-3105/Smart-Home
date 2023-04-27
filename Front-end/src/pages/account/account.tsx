@@ -7,13 +7,13 @@ import BlueButton from '../../components/Button/BlueButton'
 import ChangePassword from '../../components/Modal/ChangePassword/ChangePassword'
 export default function Account() {
   const [displayModal, setDisplayModal] = React.useState(false)
-  const [firstName, setFirstName] = React.useState("")
-  const [lastName, setLastName] = React.useState("")
-  const [ssn, setSSN] = React.useState("")
-  const [email, setEmail] = React.useState("")
-  const [phone,setPhone] = React.useState("")
-  const [district,setDistric] = React.useState("")
-  const [city,setCity] = React.useState("")
+  const [firstName, setFirstName] = React.useState('')
+  const [lastName, setLastName] = React.useState('')
+  const [ssn, setSSN] = React.useState('')
+  const [email, setEmail] = React.useState('')
+  const [phone, setPhone] = React.useState('')
+  const [district, setDistric] = React.useState('')
+  const [city, setCity] = React.useState('')
 
   React.useEffect(() => {
     const getInfomation = async () => {
@@ -24,16 +24,14 @@ export default function Account() {
       }
 
       const json = await resp.json()
-      let info = json["user"]
-      setFirstName(info["FName"])
-      setLastName(info["LName"])
-      setSSN(info["SSN"])
-      setCity(info["City"])
-      setPhone(info["SSN"])
-      setDistric(info["District"])
-      setEmail(info["Email"])
-
-
+      let info = json['user']
+      setFirstName(info['FName'])
+      setLastName(info['LName'])
+      setSSN(info['SSN'])
+      setCity(info['City'])
+      setPhone(info['SSN'])
+      setDistric(info['District'])
+      setEmail(info['Email'])
     }
     getInfomation()
   }, [])
@@ -64,7 +62,6 @@ export default function Account() {
               type="text"
               value="Thái"
               onChange={(e) => setLastName(e.target.value)}
-
             ></Input_nomal>
           </div>
           <Input_nomal label="SSN" type="text" value="2012036"></Input_nomal>
@@ -86,7 +83,6 @@ export default function Account() {
               type="text"
               value={district}
               onChange={(e) => setDistric(e.target.value)}
-
             ></Input_nomal>
             <Input_nomal
               label="City"

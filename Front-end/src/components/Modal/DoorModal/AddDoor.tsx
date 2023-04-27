@@ -6,12 +6,10 @@ import RedButton from '../../Button/RedButton'
 import axios from 'axios'
 import Light from '../../../pages/light/light'
 
-export default function ModalCreate(props: {
+export default function AddDoor(props: {
   displayModal: boolean
   setDisplayModal: any
   houseID: any
-  lightList: any
-  setLightList: any
 }) {
   const [id, setId] = React.useState('')
   const [name, setName] = React.useState('')
@@ -57,7 +55,7 @@ export default function ModalCreate(props: {
 
       const config = {
         method: 'post',
-        url: 'http://localhost:3000/light/create',
+        url: 'http://localhost:3000/door/create',
         headers: {
           'Content-Type': 'application/json',
         },

@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { Icon } from "@iconify/react";
+import { useState } from 'react'
+import { Icon } from '@iconify/react'
 
 export const ToggleButton = (props: {
-  toggleHeight: string;
-  label: string;
-  callback: () => void;
+  toggleHeight: string
+  label: string
+  callback: () => void
 }) => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false)
   return (
     <div className="flex flex-row items-start gap-2" onClick={props.callback}>
       <div className="transition-transform active:scale-110">
@@ -26,5 +26,5 @@ export const ToggleButton = (props: {
       </div>
       <div className="grow pt-1 text-lg">{props.label}</div>
     </div>
-  );
-};
+  )
+}
