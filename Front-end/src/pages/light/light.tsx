@@ -41,11 +41,11 @@ export default function Light() {
   const [allHouse, setAllHouse] = React.useState([])
   const { id, accessToken, userRole } =
     React.useContext<CredentialsInterface>(UserContext)
-  
-  const [role, setRole] = useState(getCookie("role"));
+
+  const [role, setRole] = useState(getCookie('role'))
   const navi = useNavigate()
-  if  (role != "CU") {
-    navi("/login");
+  if (role != 'CU') {
+    navi('/login')
   }
 
   React.useEffect(() => {

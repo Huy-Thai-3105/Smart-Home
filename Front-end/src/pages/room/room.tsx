@@ -4,8 +4,8 @@ import '../../style/room.css'
 import RoomModal from '../../components/Modal/RoomModal/RoomModal'
 import BlueButton from '../../components/Button/BlueButton'
 import AddRoom from '../../components/Modal/RoomModal/AddRoomModal'
-import { CredentialsInterface, UserContext } from "../../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { CredentialsInterface, UserContext } from '../../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 import { getCookie } from '../../utilities/GetRoleCookie'
 
 export default function Room() {
@@ -19,10 +19,10 @@ export default function Room() {
 
   const [houseID, setHouseID] = React.useState('')
 
-  const [role, setRole] = React.useState(getCookie("role"));
+  const [role, setRole] = React.useState(getCookie('role'))
   const navi = useNavigate()
-  if  (role != "CU") {
-    navi("/login");
+  if (role != 'CU') {
+    navi('/login')
   }
 
   React.useEffect(() => {
@@ -89,10 +89,12 @@ export default function Room() {
       <div className="contain__room">
         {Array.isArray(allRoom) &&
           allRoom.map((room) => (
-            <div key={room['ID']} onClick={() => {
-              setDisplayModal(true) 
-              setRoomID(room['ID'])
-            }} 
+            <div
+              key={room['ID']}
+              onClick={() => {
+                setDisplayModal(true)
+                setRoomID(room['ID'])
+              }}
             >
               <Room_component
                 room_name={room['Roomname']}

@@ -17,7 +17,7 @@ export default function RoomModal(props: {
   React.useEffect(() => {
     setRoomID(props.roomId)
     // console.log(roomID)
-  },[props.roomId])
+  }, [props.roomId])
 
   React.useEffect(() => {
     if (roomID != 0) {
@@ -34,7 +34,7 @@ export default function RoomModal(props: {
       }
       getDeviceRoom(roomID)
     }
-  }, [roomID] )
+  }, [roomID])
 
   React.useEffect(() => {
     if (click == true) {
@@ -43,7 +43,7 @@ export default function RoomModal(props: {
           method: 'DELETE',
         })
       }
-      console.log('DELETE DEVICE',{roomID})
+      console.log('DELETE DEVICE', { roomID })
       deleteRoom()
     }
   }, [click])
@@ -102,7 +102,7 @@ export default function RoomModal(props: {
           </tbody>
         </Table>
         <div className="flex flex-row justify-end">
-          <RedButton onClick={()=> setClick(true)}>Delete Room</RedButton>
+          <RedButton onClick={() => setClick(true)}>Delete Room</RedButton>
         </div>
       </div>
     </Form>

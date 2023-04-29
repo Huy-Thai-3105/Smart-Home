@@ -9,8 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import AddAir from '../../components/Modal/AirModal/AddAir'
 import AirUpdateAuto from '../../components/Modal/AirModal/AirUpdateAuto'
-import { CredentialsInterface, UserContext } from "../../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { CredentialsInterface, UserContext } from '../../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 import { getCookie } from '../../utilities/GetRoleCookie'
 
 interface AirDevice {
@@ -27,14 +27,12 @@ interface AirDevice {
   Humidity: any
 }
 
-
 export default function AirConditional() {
-  const [role, setRole] = useState(getCookie("role"));
+  const [role, setRole] = useState(getCookie('role'))
   const navi = useNavigate()
-  if  (role != "CU") {
-    navi("/login");
+  if (role != 'CU') {
+    navi('/login')
   }
-
 
   const [AirList, setAirList] = React.useState<AirDevice[]>([])
 
@@ -76,37 +74,41 @@ export default function AirConditional() {
   React.useEffect(() => {
     if (houseID) {
       const getAirCondition = async (houseID) => {
-        const resp = await fetch(`http://localhost:3000/airCondition/all/${houseID}`);
+        const resp = await fetch(
+          `http://localhost:3000/airCondition/all/${houseID}`
+        )
 
         if (!resp.ok) {
-          alert('Something wrong');
+          alert('Something wrong')
         }
 
-        const json = await resp.json();
-        if (json['result'] == 'success') setAirList(json['air_conditions']);
-      };
-      
-      getAirCondition(houseID);
+        const json = await resp.json()
+        if (json['result'] == 'success') setAirList(json['air_conditions'])
+      }
+
+      getAirCondition(houseID)
     }
     const intervalId = setInterval(() => {
       if (houseID) {
         const getAirCondition = async (houseID) => {
-          const resp = await fetch(`http://localhost:3000/airCondition/all/${houseID}`);
-  
+          const resp = await fetch(
+            `http://localhost:3000/airCondition/all/${houseID}`
+          )
+
           if (!resp.ok) {
-            alert('Something wrong');
+            alert('Something wrong')
           }
-  
-          const json = await resp.json();
-          if (json['result'] == 'success') setAirList(json['air_conditions']);
-        };
-        
-        getAirCondition(houseID);
+
+          const json = await resp.json()
+          if (json['result'] == 'success') setAirList(json['air_conditions'])
+        }
+
+        getAirCondition(houseID)
       }
-    }, 5000); // Call the function every 5 seconds
-  
-    return () => clearInterval(intervalId);
-  }, [houseID]);
+    }, 5000) // Call the function every 5 seconds
+
+    return () => clearInterval(intervalId)
+  }, [houseID])
   // turn on/off device
 
   React.useEffect(() => {
@@ -269,31 +271,27 @@ export default function AirConditional() {
                     </td>
 
                     <td>{info.ID}</td>
-                    {info.Temperature > info.Temperature_D ?
-                    (
-                    <td className="color_red"> 
-                      <div className='flex flex-row justify-center items-center gap-3'> 
-                       {info.Temperature} 
-                       <img className='img__alert' src="../alert.png"></img>
-                      </div>
-                    </td> 
-                    )
-                    :
-                    <td className="color_red"> {info.Temperature}</td>
-                     }
+                    {info.Temperature > info.Temperature_D ? (
+                      <td className="color_red">
+                        <div className="flex flex-row items-center justify-center gap-3">
+                          {info.Temperature}
+                          <img className="img__alert" src="../alert.png"></img>
+                        </div>
+                      </td>
+                    ) : (
+                      <td className="color_red"> {info.Temperature}</td>
+                    )}
                     {/* <td className="color_blue"> {info.Humidity}</td> */}
-                    {info.Humidity > info.Humidity_D ?
-                    (
-                    <td className="color_blue"> 
-                      <div className='flex flex-row justify-center items-center gap-3'> 
-                       {info.Humidity} 
-                       <img className='img__alert' src="../alert.png"></img>
-                      </div>
-                    </td> 
-                    )
-                    :
-                    <td className="color_blue"> {info.Humidity}</td>
-                     }
+                    {info.Humidity > info.Humidity_D ? (
+                      <td className="color_blue">
+                        <div className="flex flex-row items-center justify-center gap-3">
+                          {info.Humidity}
+                          <img className="img__alert" src="../alert.png"></img>
+                        </div>
+                      </td>
+                    ) : (
+                      <td className="color_blue"> {info.Humidity}</td>
+                    )}
                     <td>Thái</td>
                     <td
                       onClick={() => {

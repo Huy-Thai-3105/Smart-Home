@@ -1,0 +1,11 @@
+.contain_admin_page {
+  width: 90%;
+  margin: auto;
+  background-color: white;
+  height: 70vh;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

@@ -5,8 +5,8 @@ import Input_nomal from '../../components/InputBox/input_nomal'
 import { Button } from 'react-bootstrap'
 import BlueButton from '../../components/Button/BlueButton'
 import ChangePassword from '../../components/Modal/ChangePassword/ChangePassword'
-import { CredentialsInterface, UserContext } from "../../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { CredentialsInterface, UserContext } from '../../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 import { getCookie } from '../../utilities/GetRoleCookie'
 
 export default function Account() {
@@ -19,12 +19,12 @@ export default function Account() {
   const [district, setDistric] = React.useState('')
   const [city, setCity] = React.useState('')
 
-  const [role, setRole] = React.useState(getCookie("role"));
-  const [userID, setUserID] = React.useState(getCookie("userID"))
+  const [role, setRole] = React.useState(getCookie('role'))
+  const [userID, setUserID] = React.useState(getCookie('userID'))
   console.log(userID)
   const navi = useNavigate()
-  if  (role != "CU") {
-    navi("/login");
+  if (role != 'CU') {
+    navi('/login')
   }
 
   React.useEffect(() => {
@@ -69,12 +69,7 @@ export default function Account() {
               ></Input_nomal>
             </div>
 
-            <Input_nomal
-              label="Last name"
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            ></Input_nomal>
+            
           </div>
           <Input_nomal label="SSN" type="text" value={ssn}></Input_nomal>
           <Input_nomal

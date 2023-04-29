@@ -14,15 +14,10 @@ export default function login() {
   const [userName, setUserName] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [click, setClick] = React.useState(false)
-  const [userID, setUserID] = React.useState(getCookie("userID"))
+  const [userID, setUserID] = React.useState(getCookie('userID'))
 
-  const {
-    userRole,
-    setUserId,
-    setUserRole,
-    setAccessToken,
-    setRefreshToken,
-  } = React.useContext<CredentialsInterface>(UserContext)
+  const { userRole, setUserId, setUserRole, setAccessToken, setRefreshToken } =
+    React.useContext<CredentialsInterface>(UserContext)
 
   React.useEffect(() => {
     if (userName != '' && password != '') {
@@ -43,14 +38,15 @@ export default function login() {
 
         const respone = await axios(config)
         if (respone.status != 200) {
-          console.log("invalid Input")
+          alert('invalid Input')
         } else {
           setAccessToken(respone.data['accessToken'])
           setUserRole(respone.data['role'])
           setRefreshToken(respone.data['refreshToken'])
           setUserId(respone.data['UserID'])
-          console.log(respone.data["UserID"])
-          navigate_home()
+          console.log(respone.data['UserID'])
+          if (respone.data['role'] == 'CU') navigate_home()
+          else navigate_AdminPage()
         }
       }
       handleLogin()
@@ -62,7 +58,9 @@ export default function login() {
   const navigate_home = () => {
     navigate('/room')
   }
-
+  const navigate_AdminPage = () => {
+    navigate('/admin')
+  }
 
   return (
     <div className="container_body">

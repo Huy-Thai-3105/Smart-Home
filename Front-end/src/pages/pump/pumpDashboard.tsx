@@ -66,7 +66,7 @@ export default function PumpChart() {
       getHistory(roomID)
     }
   }, [roomID])
-  
+
   return (
     <div className="contain_content">
       <div className="row2">
