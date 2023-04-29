@@ -5,6 +5,10 @@ import Input_nomal from '../../components/InputBox/input_nomal'
 import { Button } from 'react-bootstrap'
 import BlueButton from '../../components/Button/BlueButton'
 import ChangePassword from '../../components/Modal/ChangePassword/ChangePassword'
+import { CredentialsInterface, UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
+import { getCookie } from '../../utilities/GetRoleCookie'
+
 export default function Account() {
   const [displayModal, setDisplayModal] = React.useState(false)
   const [firstName, setFirstName] = React.useState('')
@@ -15,9 +19,17 @@ export default function Account() {
   const [district, setDistric] = React.useState('')
   const [city, setCity] = React.useState('')
 
+  const [role, setRole] = React.useState(getCookie("role"));
+  const [userID, setUserID] = React.useState(getCookie("userID"))
+  console.log(userID)
+  const navi = useNavigate()
+  if  (role != "CU") {
+    navi("/login");
+  }
+
   React.useEffect(() => {
     const getInfomation = async () => {
-      const resp = await fetch(`http://localhost:3000/user/3`)
+      const resp = await fetch(`http://localhost:3000/user/${userID}`)
 
       if (!resp.ok) {
         alert('Something wrong')
@@ -29,7 +41,7 @@ export default function Account() {
       setLastName(info['LName'])
       setSSN(info['SSN'])
       setCity(info['City'])
-      setPhone(info['SSN'])
+      setPhone(info['Phone'])
       setDistric(info['District'])
       setEmail(info['Email'])
     }
@@ -60,11 +72,11 @@ export default function Account() {
             <Input_nomal
               label="Last name"
               type="text"
-              value="Thái"
+              value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             ></Input_nomal>
           </div>
-          <Input_nomal label="SSN" type="text" value="2012036"></Input_nomal>
+          <Input_nomal label="SSN" type="text" value={ssn}></Input_nomal>
           <Input_nomal
             label="Email"
             type="text"
@@ -74,7 +86,7 @@ export default function Account() {
           <Input_nomal
             label="Contact number"
             type="text"
-            value={lastName}
+            value={phone}
             onChange={(e) => setLastName(e.target.value)}
           ></Input_nomal>
           <div className="flex gap-5">
@@ -93,7 +105,6 @@ export default function Account() {
           </div>
           <br />
           <div className="flex justify-center gap-10">
-            <BlueButton>Save</BlueButton>
             <BlueButton
               onClick={() => {
                 setDisplayModal(true)

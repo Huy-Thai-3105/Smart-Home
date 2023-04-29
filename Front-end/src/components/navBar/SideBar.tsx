@@ -1,8 +1,18 @@
 import React from 'react'
 import Navbar from './Navbar'
 import './SideBar.css'
+import { CredentialsInterface, UserContext } from '../../context/UserContext'
+
+
 
 export default function SideBar() {
+  const {
+    userRole,
+    setUserId,
+    setUserRole,
+    setAccessToken,
+    setRefreshToken,
+  } = React.useContext<CredentialsInterface>(UserContext)
   return (
     <div className="contain_nav">
       <Navbar name="Room" src="./home.png" link="/room" />
@@ -11,7 +21,13 @@ export default function SideBar() {
       <Navbar name="Door" src="./door.png" link="/door" />
       <Navbar name="Water tree" src="./pump.png" link="/pump" />
       <Navbar name="Account" src="./setting.png" link="/account" />
-      <Navbar name="Logout" src="./logout.png" link="/login" />
+      <div onClick={()=>{
+        setUserRole("role")
+        setAccessToken('')
+        setRefreshToken('')
+    }}>
+        <Navbar name="Logout" src="./logout.png" link="/login" />
+      </div>
     </div>
   )
 }

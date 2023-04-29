@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import AddAir from '../../components/Modal/AirModal/AddAir'
 import AirUpdateAuto from '../../components/Modal/AirModal/AirUpdateAuto'
+import { getCookie } from '../../utilities/GetRoleCookie'
+import { useNavigate } from "react-router-dom";
 
 export default function Pump() {
   const [pumpList, setPumpList] = React.useState('')
@@ -31,6 +33,13 @@ export default function Pump() {
 
   const [numAirOn, setnumAirOn] = React.useState(0)
   // get house
+
+  const [role, setRole] = useState(getCookie("role"));
+  const navi = useNavigate()
+  if  (role != "CU") {
+    navi("/login");
+  }
+
   React.useEffect(() => {
     const getHouse = async () => {
       const resp = await fetch(`http://localhost:3000/house/all`)

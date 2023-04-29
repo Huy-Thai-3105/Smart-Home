@@ -17,11 +17,12 @@ import LightHistory from './pages/light/lightHistory'
 import AirHistory from './pages/airConditional/airHistory'
 import PumpHistory from './pages/pump/pumpHistory'
 import PumpChart from './pages/pump/pumpDashboard'
+import UserProvider, { UserContext } from "./context/UserContext";
+
 // import AitHistory from './pages/airConditional/'
-//import UserProvider, { UserContext } from "./context/UserContext";
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    {/* <UserProvider> */}
+    <UserProvider>
 
     <BrowserRouter>
       <Routes>
@@ -43,6 +44,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         </Route>
       </Routes>
     </BrowserRouter>
-    {/* </UserProvider> */}
+    </UserProvider>
   </React.StrictMode>
 )

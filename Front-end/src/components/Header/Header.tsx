@@ -1,13 +1,30 @@
 import { useNavigate } from 'react-router-dom'
 import './Header.css'
+import React from 'react'
+import { getCookie } from '../../utilities/GetRoleCookie'
 
 export default function Header() {
+
   const navigate = useNavigate()
 
   const navigateToHome = () => {
-    // 👇️ navigate to /contacts
     navigate('/room')
   }
+  const [userID, setUserID] = React.useState(getCookie("userID"))
+  const [name, setName] = React.useState('Truong Huy Thai')
+  // React.useEffect(() => {
+  //   if (userID != ""){
+  //     const getInfomation = async () => {
+  //         const resp = await fetch(`http://localhost:3000/user/${userID}`)
+        
+  //         const json = await resp.json()
+  //         let info = json['user']
+  //         setName(info['FName'] +" "+ info['LName'])
+  //       }
+  //       getInfomation()
+  //   }
+  // }, [])
+
   return (
     <div className="page">
       <div className="container_header">
@@ -17,7 +34,7 @@ export default function Header() {
         </div>
         <div className="user_contain">
           <img className="img__1" src="./user.png"></img>
-          <p>Trương Huy Thái</p>
+          <p>{name}</p>
         </div>
       </div>
     </div>

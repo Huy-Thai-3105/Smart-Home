@@ -66,23 +66,7 @@ export default function PumpChart() {
       getHistory(roomID)
     }
   }, [roomID])
-  // React.useEffect(() => {
-  //   if (houseID) {
-  //     const getHistory = async (houseID) => {
-  //       const resp = await fetch(
-  //         ` `
-  //       )
-
-  //       if (!resp.ok) {
-  //         alert('Something wrong')
-  //       }
-
-  //       const json = await resp.json()
-  //       if (json['result'] == 'success') setDataHis(json['devices'])
-  //     }
-  //     getHistory(houseID)
-  //   }
-  // }, [houseID])
+  
   return (
     <div className="contain_content">
       <div className="row2">

@@ -10,6 +10,7 @@ import axios from 'axios'
 import AddLightModal from '../../components/Modal/LightModal/AddLight'
 import { CredentialsInterface, UserContext } from '../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
+import { getCookie } from '../../utilities/GetRoleCookie'
 
 interface Light {
   ID: any
@@ -40,12 +41,12 @@ export default function Light() {
   const [allHouse, setAllHouse] = React.useState([])
   const { id, accessToken, userRole } =
     React.useContext<CredentialsInterface>(UserContext)
-
+  
+  const [role, setRole] = useState(getCookie("role"));
   const navi = useNavigate()
-  // console.log(userRole)
-  // if (userRole !== "role") {
-  //   navi("/login");
-  // }
+  if  (role != "CU") {
+    navi("/login");
+  }
 
   React.useEffect(() => {
     const getHouse = async () => {

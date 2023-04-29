@@ -87,3 +87,8 @@
   align-items: center;
   justify-content: center;
 } */
+
+.img__alert{
+  width: 20px;
+  height: 20px;
+}

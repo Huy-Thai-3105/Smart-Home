@@ -7,18 +7,18 @@ import axios from 'axios'
 import { useCookies } from 'react-cookie'
 import { CredentialsInterface, UserContext } from '../../context/UserContext'
 import alertGradient from '@material-tailwind/react/theme/components/alert/alertGradient'
+import { getCookie } from '../../utilities/GetRoleCookie'
+import { invalid } from 'moment'
 
 export default function login() {
   const [userName, setUserName] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [click, setClick] = React.useState(false)
-  const [cookies, setCookies, removeCookies] = useCookies(['user'])
+  const [userID, setUserID] = React.useState(getCookie("userID"))
 
   const {
-    setPhone,
+    userRole,
     setUserId,
-    setUsername,
-    setUserEmail,
     setUserRole,
     setAccessToken,
     setRefreshToken,
@@ -31,7 +31,6 @@ export default function login() {
           username: userName,
           password: password,
         })
-        console.log(data)
 
         const config = {
           method: 'post',
@@ -44,12 +43,13 @@ export default function login() {
 
         const respone = await axios(config)
         if (respone.status != 200) {
-          alert('Incorrect login information')
+          console.log("invalid Input")
         } else {
-          setAccessToken(respone['accessToken'])
-          setUserRole(respone['role'])
-          setRefreshToken(respone['refreshToken'])
-          setUserId(3)
+          setAccessToken(respone.data['accessToken'])
+          setUserRole(respone.data['role'])
+          setRefreshToken(respone.data['refreshToken'])
+          setUserId(respone.data['UserID'])
+          console.log(respone.data["UserID"])
           navigate_home()
         }
       }
@@ -60,24 +60,13 @@ export default function login() {
 
   const navigate = useNavigate()
   const navigate_home = () => {
-    navigate('/light')
+    navigate('/room')
   }
 
-  // React.useEffect(() => {
-  //   if (cookies.user) {
-  //     const navigateToHome = () => {
-  //       navigate('/room')
-  //     }
-  //   }
-  // }, [cookies]);
 
   return (
     <div className="container_body">
       <div className="login__container">
-        {/* <div className="logo">
-            <img src="../logo.png" className="img_size"></img>
-            <h1 className="h1_font">My Home</h1>
-          </div> */}
         <p className="p__size">Login</p>
         <p className="title__">
           Welcome to My house! Please enter your details.
@@ -107,7 +96,4 @@ export default function login() {
       </div>
     </div>
   )
-}
-function navi(arg0: string) {
-  throw new Error('Function not implemented.')
 }

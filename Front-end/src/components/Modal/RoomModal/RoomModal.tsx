@@ -13,14 +13,15 @@ export default function RoomModal(props: {
 }) {
   const [roomID, setRoomID] = React.useState(0)
   const [device, setDevide] = React.useState('[]')
-
+  const [click, setClick] = React.useState(false)
   React.useEffect(() => {
     setRoomID(props.roomId)
-    console.log(roomID)
-  }, [props.roomId])
+    // console.log(roomID)
+  },[props.roomId])
 
   React.useEffect(() => {
-    if (roomID != 0 && device == '[]') {
+    if (roomID != 0) {
+      console.log(props.roomId)
       const getDeviceRoom = async (roomID) => {
         const resp = await fetch(`http://localhost:3000/room/device/${roomID}`)
 
@@ -31,11 +32,21 @@ export default function RoomModal(props: {
         const json = await resp.json()
         if (json['result'] == 'success') setDevide(json['room'])
       }
-      console.log(device)
       getDeviceRoom(roomID)
     }
-  }, [[props.roomId]])
+  }, [roomID] )
 
+  React.useEffect(() => {
+    if (click == true) {
+      async function deleteRoom() {
+        await fetch(`http://localhost:3000/room/${roomID}`, {
+          method: 'DELETE',
+        })
+      }
+      console.log('DELETE DEVICE',{roomID})
+      deleteRoom()
+    }
+  }, [click])
   return (
     <Form
       displayModal={props.displayModal}
@@ -90,6 +101,9 @@ export default function RoomModal(props: {
               ))}
           </tbody>
         </Table>
+        <div className="flex flex-row justify-end">
+          <RedButton onClick={()=> setClick(true)}>Delete Room</RedButton>
+        </div>
       </div>
     </Form>
   )

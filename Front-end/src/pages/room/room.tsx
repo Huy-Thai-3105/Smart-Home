@@ -4,6 +4,10 @@ import '../../style/room.css'
 import RoomModal from '../../components/Modal/RoomModal/RoomModal'
 import BlueButton from '../../components/Button/BlueButton'
 import AddRoom from '../../components/Modal/RoomModal/AddRoomModal'
+import { CredentialsInterface, UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
+import { getCookie } from '../../utilities/GetRoleCookie'
+
 export default function Room() {
   const [allRoom, setAllRoom] = React.useState([])
   const [allHouse, setAllHouse] = React.useState([])
@@ -14,6 +18,12 @@ export default function Room() {
   const [displayModalAdd, setDisplayModalAdd] = React.useState(false)
 
   const [houseID, setHouseID] = React.useState('')
+
+  const [role, setRole] = React.useState(getCookie("role"));
+  const navi = useNavigate()
+  if  (role != "CU") {
+    navi("/login");
+  }
 
   React.useEffect(() => {
     const getHouse = async () => {
@@ -61,14 +71,12 @@ export default function Room() {
               <option
                 value={option['ID']}
                 onClick={() => {
-                  setRoomID(option['ID'])
                   console.log(option['ID'])
                 }}
               >
                 {option['Housename']}
               </option>
             ))}
-          <label className="before:content[' '] after:content[' '] text-blue-gray-400 before:border-blue-gray-200 after:border-blue-gray-200 peer-placeholder-shown:text-blue-gray-500 peer-disabled:peer-placeholder-shown:text-blue-gray-500 pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent"></label>
         </select>
         <BlueButton
           onClick={() => {
@@ -81,7 +89,11 @@ export default function Room() {
       <div className="contain__room">
         {Array.isArray(allRoom) &&
           allRoom.map((room) => (
-            <div key={room['ID']} onClick={() => setDisplayModal(true)}>
+            <div key={room['ID']} onClick={() => {
+              setDisplayModal(true) 
+              setRoomID(room['ID'])
+            }} 
+            >
               <Room_component
                 room_name={room['Roomname']}
                 num_device={room['Total']}
