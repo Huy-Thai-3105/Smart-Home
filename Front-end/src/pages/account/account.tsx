@@ -68,6 +68,12 @@ export default function Account() {
                 onChange={(e) => setFirstName(e.target.value)}
               ></Input_nomal>
             </div>
+              <Input_nomal
+              label="Last name"
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              ></Input_nomal>
 
             
           </div>
