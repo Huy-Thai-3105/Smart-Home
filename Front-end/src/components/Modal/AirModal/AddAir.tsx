@@ -58,7 +58,7 @@ export default function ModalCreate(props: {
 
       const config = {
         method: 'post',
-        url: 'http://localhost:3000/aircondition',
+        url: 'http://localhost:3000/aircondition/create',
         headers: {
           'Content-Type': 'application/json',
         },

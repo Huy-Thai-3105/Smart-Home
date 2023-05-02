@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../style/light.css'
 import Table from '../../components/Table/Table'
+import { getCookie } from '../../utilities/GetRoleCookie'
 
 function convertToMinutesAndSeconds(seconds) {
   const hours = Math.floor(seconds / 3600)
@@ -16,20 +17,24 @@ export default function LightHistory() {
   const [allHouse, setAllHouse] = React.useState([])
   const [houseID, setHouseID] = React.useState('')
 
+  const [userID, setUserID] = React.useState(getCookie('userID'))
   React.useEffect(() => {
-    const getHouse = async () => {
-      const resp = await fetch(`http://localhost:3000/house/all`)
-
-      if (!resp.ok) {
-        alert('Something wrong')
+    if (userID){
+      const getHouse = async () => {
+        const resp = await fetch(`http://localhost:3000/house/all/${userID}`)
+  
+        if (!resp.ok) {
+          alert('Something wrong')
+        }
+  
+        const json = await resp.json()
+        setAllHouse(json['houses'])
+        setHouseID(json['houses'][0].ID)
       }
+  
+      getHouse()
 
-      const json = await resp.json()
-      setAllHouse(json['houses'])
-      setHouseID(json['houses'][0].ID)
     }
-
-    getHouse()
   }, [])
 
   React.useEffect(() => {

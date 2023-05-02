@@ -5,29 +5,35 @@ import LineChartTemp from '../../components/Chart/LineChartTemp'
 import BlueButton from '../../components/Button/BlueButton'
 import RedButton from '../../components/Button/RedButton'
 import HumidityChart from '../../components/Chart/LineChartHumidity'
+import { getCookie } from '../../utilities/GetRoleCookie'
 
 export default function AirDashboard() {
-  const [dataHis, setDataHis] = React.useState()
+  const [dataHisTemp, setDataHisTemp] = React.useState()
+  const [dataHisHumidity,setDataHisHumidity] = React.useState()
   const [allRoom, setAllRoom] = React.useState([])
   const [houseID, setHouseID] = React.useState('')
   const [roomID, setRoomID] = React.useState('')
   const [allHouse, setAllHouse] = React.useState([])
 
   const [choseType, setChoseType] = React.useState(true)
+  const [userID, setUserID] = React.useState(getCookie('userID'))
   React.useEffect(() => {
-    const getHouse = async () => {
-      const resp = await fetch(`http://localhost:3000/house/all`)
-
-      if (!resp.ok) {
-        alert('Something wrong')
+    if (userID){
+      const getHouse = async () => {
+        const resp = await fetch(`http://localhost:3000/house/all/${userID}`)
+  
+        if (!resp.ok) {
+          alert('Something wrong')
+        }
+  
+        const json = await resp.json()
+        setAllHouse(json['houses'])
+        setHouseID(json['houses'][0].ID)
       }
+  
+      getHouse()
 
-      const json = await resp.json()
-      setAllHouse(json['houses'])
-      setHouseID(json['houses'][0].ID)
     }
-
-    getHouse()
   }, [])
 
   React.useEffect(() => {
@@ -60,7 +66,27 @@ export default function AirDashboard() {
         }
 
         const json = await resp.json()
-        setDataHis(json['records'])
+        setDataHisTemp(json['records'])
+      }
+
+      getHistory(roomID)
+    }
+  }, [roomID])
+
+  React.useEffect(() => {
+    if (roomID) {
+      const getHistory = async (roomID) => {
+        const resp = await fetch(
+          `http://localhost:3000/record/humidity/all/${roomID}`
+        )
+
+        if (!resp.ok) {
+          alert('Something wrong')
+        }
+
+        const json = await resp.json()
+        setDataHisHumidity(json['records'])
+        console.log(dataHisHumidity)
       }
 
       getHistory(roomID)
@@ -136,13 +162,13 @@ export default function AirDashboard() {
       <div className="row3">
         <div className="contain_chart">
           <div className="chart_1">
-            <LineChartTemp dataHis={dataHis}></LineChartTemp>
+            <LineChartTemp dataHis={dataHisTemp}></LineChartTemp>
             <div className="flex flex-row items-center justify-center">
               <p className="p_temperature">Temperature record</p>
             </div>
           </div>
           <div className="chart_1">
-            <HumidityChart dataHis={dataHis}></HumidityChart>
+            <HumidityChart dataHis={dataHisHumidity}></HumidityChart>
             <div className="flex flex-row items-center justify-center">
               <p className="p_humidity">Humidity record</p>
             </div>

@@ -8,6 +8,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import AddLightModal from '../../components/Modal/LightModal/AddLight'
+import { getCookie } from '../../utilities/GetRoleCookie'
 
 export default function Door() {
   const [doorList, setDoorList] = React.useState('')
@@ -30,20 +31,24 @@ export default function Door() {
 
   const [numDoorOpen, setNumDoorOpen] = React.useState(0)
   // get house
+  const [userID, setUserID] = React.useState(getCookie('userID'))
   React.useEffect(() => {
-    const getHouse = async () => {
-      const resp = await fetch(`http://localhost:3000/house/all`)
-
-      if (!resp.ok) {
-        alert('Something wrong')
+    if (userID){
+      const getHouse = async () => {
+        const resp = await fetch(`http://localhost:3000/house/all/${userID}`)
+  
+        if (!resp.ok) {
+          alert('Something wrong')
+        }
+  
+        const json = await resp.json()
+        setAllHouse(json['houses'])
+        setHouseID(json['houses'][0].ID)
       }
+  
+      getHouse()
 
-      const json = await resp.json()
-      setAllHouse(json['houses'])
-      setHouseID(json['houses'][0].ID)
     }
-
-    getHouse()
   }, [])
 
   // get device in house

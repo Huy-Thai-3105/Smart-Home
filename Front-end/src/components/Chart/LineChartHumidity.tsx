@@ -13,9 +13,9 @@ export default function HumidityChart(props: { dataHis: any }) {
     <div>
       <ResponsiveContainer width={'100%'} aspect={1.5}>
         <LineChart data={props.dataHis}>
-          <Line type="monotone" dataKey={'Temperature'} stroke="blue" />
+          <Line type="monotone" dataKey={'Humidity'} stroke="blue" />
           <XAxis dataKey={'TimeDate'}></XAxis>
-          <YAxis dataKey={'Temperature'} domain={[0, 100]}></YAxis>
+          <YAxis dataKey={'Humidity'} domain={[0, 100]}></YAxis>
           <CartesianGrid stroke="#eee" strokeDasharray="1 1" />
           <Tooltip></Tooltip>
         </LineChart>

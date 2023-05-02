@@ -24,21 +24,25 @@ export default function Room() {
   if (role != 'CU') {
     navi('/login')
   }
-
+  
+  const [userID, setUserID] = React.useState(getCookie('userID'))
   React.useEffect(() => {
-    const getHouse = async () => {
-      const resp = await fetch(`http://localhost:3000/house/all`)
-
-      if (!resp.ok) {
-        alert('Something wrong')
+    if (userID){
+      const getHouse = async () => {
+        const resp = await fetch(`http://localhost:3000/house/all/${userID}`)
+  
+        if (!resp.ok) {
+          alert('Something wrong')
+        }
+  
+        const json = await resp.json()
+        setAllHouse(json['houses'])
+        setHouseID(json['houses'][0].ID)
       }
+  
+      getHouse()
 
-      const json = await resp.json()
-      setAllHouse(json['houses'])
-      setHouseID(json['houses'][0].ID)
     }
-
-    getHouse()
   }, [])
 
   React.useEffect(() => {
