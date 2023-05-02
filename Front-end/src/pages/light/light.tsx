@@ -113,8 +113,7 @@ export default function Light() {
           )
 
           if (deviceToUpdate) {
-            deviceToUpdate.Device_Status =
-              deviceToUpdate.Device_Status === 'off' ? 'on' : 'off'
+            deviceToUpdate.Device_Status = deviceToUpdate.Device_Status === 'off' ? 'on' : 'off'
             // console.log(devices)
             setLightList(devices)
             console.log(lightList)
@@ -126,6 +125,7 @@ export default function Light() {
       updateStatus(idStatus)
     }
   }, [idStatus, status])
+
 
   React.useEffect(() => {
     if (IdMode) {
@@ -141,10 +141,23 @@ export default function Light() {
           data: data,
         }
         const response = await axios(config)
+        if (response.status == 200) {
+          const devices = [...lightList]
+          const deviceToUpdate = devices.find(
+            (device) => device.ID === IdMode
+          )
+          if (deviceToUpdate) {
+            deviceToUpdate.Mode = deviceToUpdate.Mode === 'manual' ? 'auto' : 'manual'
+            setLightList(devices)
+          } else {
+            console.log('abcd')
+          }
+        }
       }
       updateStatus(IdMode)
     }
-  }, [IdMode])
+  }, [IdMode,mode])
+
 
   React.useEffect(() => {
     if (deleteId) {

@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import AddLightModal from '../../components/Modal/LightModal/AddLight'
 import { getCookie } from '../../utilities/GetRoleCookie'
+import AddDoor from '../../components/Modal/DoorModal/AddDoor'
 
 export default function Door() {
   const [doorList, setDoorList] = React.useState('')
@@ -107,25 +108,21 @@ export default function Door() {
     }
   }, [IdMode])
 
-  // delete aircondition
-  // React.useEffect(() => {
-  //   if (deleteId) {
-  //     async function deleteLight() {
-  //       await fetch(`http://localhost:3000/pump/${deleteId}`, {
-  //         method: 'DELETE',
-  //       })
-  //     }
+  React.useEffect(() => {
+    if (deleteId) {
+      async function deleteDoor() {
+        await fetch(`http://localhost:3000/door/${deleteId}`, {
+          method: 'DELETE',
+        })
+      }
 
-  //     console.log('DELETE DEVICE')
-  //     deleteLight()
-  //   }
-  // }, [deleteId])
+      console.log('DELETE DEVICE')
+      deleteDoor()
+    }
+  }, [deleteId])
   return (
     <div className="contain">
-      {/* <AddLightModal
-        displayModal={displayModal}
-        setDisplayModal={setDisplayModal}
-      /> */}
+      <AddDoor displayModal={displayModal} setDisplayModal={setDisplayModal} houseID={houseID}></AddDoor>
       <div className="contain_content">
         <div className="row2">
           <div className="row2_1">

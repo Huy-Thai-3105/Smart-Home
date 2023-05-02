@@ -18,6 +18,7 @@ export default function login() {
 
   const { userRole, setUserId, setUserRole, setAccessToken, setRefreshToken } =
     React.useContext<CredentialsInterface>(UserContext)
+  const navigate = useNavigate()
 
   React.useEffect(() => {
     if (userName != '' && password != '') {
@@ -45,8 +46,12 @@ export default function login() {
           setRefreshToken(respone.data['refreshToken'])
           setUserId(respone.data['UserID'])
           console.log(respone.data['UserID'])
-          if (respone.data['role'] == 'CU') navigate_home()
-          else navigate_AdminPage()
+          if (respone.data['role'] == 'CU') {
+            navigate('/room')
+          }
+          else {
+            navigate('/admin')
+          }
         }
       }
       handleLogin()
@@ -54,13 +59,6 @@ export default function login() {
     }
   }, [click])
 
-  const navigate = useNavigate()
-  const navigate_home = () => {
-    navigate('/room')
-  }
-  const navigate_AdminPage = () => {
-    navigate('/admin')
-  }
 
   return (
     <div className="container_body">

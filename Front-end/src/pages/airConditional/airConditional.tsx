@@ -164,10 +164,22 @@ export default function AirConditional() {
           data: data,
         }
         const response = await axios(config)
+         if (response.status == 200) {
+          const devices = [...AirList]
+          const deviceToUpdate = devices.find(
+            (device) => device.ID === IdMode
+          )
+          if (deviceToUpdate) {
+            deviceToUpdate.Mode = deviceToUpdate.Mode === 'manual' ? 'auto' : 'manual'
+            setAirList(devices)
+          } else {
+            console.log('abcd')
+          }
+        }
       }
       updateStatus(IdMode)
     }
-  }, [IdMode])
+  }, [IdMode,mode])
 
   // delete aircondition
   React.useEffect(() => {
