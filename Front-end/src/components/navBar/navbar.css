@@ -11,8 +11,9 @@
 
 .contain_element_active {
   width: 250px;
-  background-color: #3c8fdb;
-  color: white;
+  background-color: rgb(232, 228, 228);
+  color: black;
+  font-weight: 600;
   display: flex;
   flex-direction: row;
   justify-content: center;
