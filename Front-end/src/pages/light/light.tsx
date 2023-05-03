@@ -66,11 +66,14 @@ export default function Light() {
     }
   }, [])
 
+ 
+
   React.useEffect(() => {
     if (houseID) {
       const getAllLight = async (houseID) => {
-        setLightList([])
-        const resp = await fetch(`http://localhost:3000/light/all/${houseID}`)
+        const resp = await fetch(
+          `http://localhost:3000/light/all/${houseID}`
+        )
 
         if (!resp.ok) {
           alert('Something wrong')
@@ -86,8 +89,37 @@ export default function Light() {
           json['lights'].filter((device) => device.Device_Status === 'on')
         )
       }
+
       getAllLight(houseID)
     }
+    const intervalId = setInterval(() => {
+      if (houseID) {
+        const getAllLight = async (houseID) => {
+          const resp = await fetch(
+            `http://localhost:3000/light/all/${houseID}`
+          )
+
+          if (!resp.ok) {
+            alert('Something wrong')
+          }
+
+          const json = await resp.json()
+          if (json['result'] == 'success') setLightList(json['lights'])
+          setNumLightOn(
+            json['lights'].filter((light: any) => light.Device_Status == 'on')
+              .length
+          )
+          setLightListOn(
+            json['lights'].filter((device) => device.Device_Status === 'on')
+          )
+        }
+
+        getAllLight(houseID)
+        // console.log(AirList)
+      }
+    }, 5000) // Call the function every 5 seconds
+
+    return () => clearInterval(intervalId)
   }, [houseID])
 
   React.useEffect(() => {

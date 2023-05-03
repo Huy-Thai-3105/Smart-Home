@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import AddAir from '../../components/Modal/AirModal/AddAir'
 import AirUpdateAuto from '../../components/Modal/AirModal/AirUpdateAuto'
-import { CredentialsInterface, UserContext } from '../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { getCookie } from '../../utilities/GetRoleCookie'
 
@@ -87,6 +86,9 @@ export default function AirConditional() {
 
         const json = await resp.json()
         if (json['result'] == 'success') setAirList(json['air_conditions'])
+        setnumAirOn(
+          json['air_conditions'].filter((air: any) => air.Device_Status == 'on').length
+        )
       }
 
       getAirCondition(houseID)
@@ -104,6 +106,10 @@ export default function AirConditional() {
 
           const json = await resp.json()
           if (json['result'] == 'success') setAirList(json['air_conditions'])
+          setnumAirOn(
+            json['air_conditions'].filter((light: any) => light.Device_Status == 'on')
+              .length
+          )
         }
 
         getAirCondition(houseID)
