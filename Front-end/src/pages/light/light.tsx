@@ -48,23 +48,21 @@ export default function Light() {
     navi('/login')
   }
 
-  
   const [userID, setUserID] = React.useState(getCookie('userID'))
   React.useEffect(() => {
-    if (userID){
+    if (userID) {
       const getHouse = async () => {
         const resp = await fetch(`http://localhost:3000/house/all/${userID}`)
-  
+
         if (!resp.ok) {
           alert('Something wrong')
         }
-  
+
         const json = await resp.json()
         setAllHouse(json['houses'])
         setHouseID(json['houses'][0].ID)
       }
       getHouse()
-
     }
   }, [])
 
@@ -113,7 +111,8 @@ export default function Light() {
           )
 
           if (deviceToUpdate) {
-            deviceToUpdate.Device_Status = deviceToUpdate.Device_Status === 'off' ? 'on' : 'off'
+            deviceToUpdate.Device_Status =
+              deviceToUpdate.Device_Status === 'off' ? 'on' : 'off'
             // console.log(devices)
             setLightList(devices)
             console.log(lightList)
@@ -125,7 +124,6 @@ export default function Light() {
       updateStatus(idStatus)
     }
   }, [idStatus, status])
-
 
   React.useEffect(() => {
     if (IdMode) {
@@ -143,11 +141,10 @@ export default function Light() {
         const response = await axios(config)
         if (response.status == 200) {
           const devices = [...lightList]
-          const deviceToUpdate = devices.find(
-            (device) => device.ID === IdMode
-          )
+          const deviceToUpdate = devices.find((device) => device.ID === IdMode)
           if (deviceToUpdate) {
-            deviceToUpdate.Mode = deviceToUpdate.Mode === 'manual' ? 'auto' : 'manual'
+            deviceToUpdate.Mode =
+              deviceToUpdate.Mode === 'manual' ? 'auto' : 'manual'
             setLightList(devices)
           } else {
             console.log('abcd')
@@ -156,8 +153,7 @@ export default function Light() {
       }
       updateStatus(IdMode)
     }
-  }, [IdMode,mode])
-
+  }, [IdMode, mode])
 
   React.useEffect(() => {
     if (deleteId) {

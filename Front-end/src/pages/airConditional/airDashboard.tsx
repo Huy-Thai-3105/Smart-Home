@@ -9,7 +9,7 @@ import { getCookie } from '../../utilities/GetRoleCookie'
 
 export default function AirDashboard() {
   const [dataHisTemp, setDataHisTemp] = React.useState()
-  const [dataHisHumidity,setDataHisHumidity] = React.useState()
+  const [dataHisHumidity, setDataHisHumidity] = React.useState()
   const [allRoom, setAllRoom] = React.useState([])
   const [houseID, setHouseID] = React.useState('')
   const [roomID, setRoomID] = React.useState('')
@@ -18,21 +18,20 @@ export default function AirDashboard() {
   const [choseType, setChoseType] = React.useState(true)
   const [userID, setUserID] = React.useState(getCookie('userID'))
   React.useEffect(() => {
-    if (userID){
+    if (userID) {
       const getHouse = async () => {
         const resp = await fetch(`http://localhost:3000/house/all/${userID}`)
-  
+
         if (!resp.ok) {
           alert('Something wrong')
         }
-  
+
         const json = await resp.json()
         setAllHouse(json['houses'])
         setHouseID(json['houses'][0].ID)
       }
-  
-      getHouse()
 
+      getHouse()
     }
   }, [])
 

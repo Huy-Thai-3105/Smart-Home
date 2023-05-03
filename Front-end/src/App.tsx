@@ -2,10 +2,16 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from './components/Header/Header'
 import SideBar from './components/navBar/SideBar'
-// import { CredentialsInterface, UserContext } from "../src/context/UserContext";
-// import { useNavigate } from "react-router-dom";
+
+import { useNavigate } from 'react-router-dom'
+import { getCookie } from '../src/utilities/GetRoleCookie'
 
 export default function App() {
+  const [role, setRole] = React.useState(getCookie('role'))
+  const navi = useNavigate()
+  if (role != 'CU') {
+    navi('/login')
+  }
   return (
     <div>
       <div>

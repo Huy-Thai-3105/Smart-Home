@@ -10,11 +10,11 @@ export default function HeaderAdmin() {
   const { userRole, setUserId, setUserRole, setAccessToken, setRefreshToken } =
     React.useContext<CredentialsInterface>(UserContext)
 
-    const [role, setRole] = React.useState(getCookie('role'))
-    const navi = useNavigate()
-    if (role != 'AD') {
-      navi('/login')
-    }
+  const [role, setRole] = React.useState(getCookie('role'))
+  const navi = useNavigate()
+  if (role != 'AD') {
+    navi('/login')
+  }
   // React.useEffect(() => {
   //   if (userID != ""){
   //     const getInfomation = async () => {
@@ -38,12 +38,16 @@ export default function HeaderAdmin() {
         <div className="user_contain">
           <img className="img__1" src="./user.png"></img>
           <p>{name}</p>
-          <img className='img__1' src="./power.png" onClick={() => {
-          setUserRole('role')
-          setAccessToken('')
-          setRefreshToken('')
-          navi('/login')
-        }}></img>
+          <img
+            className="img__1"
+            src="./power.png"
+            onClick={() => {
+              setUserRole('role')
+              setAccessToken('')
+              setRefreshToken('')
+              navi('/login')
+            }}
+          ></img>
         </div>
       </div>
     </div>

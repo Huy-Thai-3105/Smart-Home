@@ -10,21 +10,20 @@ export default function airHistory() {
 
   const [userID, setUserID] = React.useState(getCookie('userID'))
   React.useEffect(() => {
-    if (userID){
+    if (userID) {
       const getHouse = async () => {
         const resp = await fetch(`http://localhost:3000/house/all/${userID}`)
-  
+
         if (!resp.ok) {
           alert('Something wrong')
         }
-  
+
         const json = await resp.json()
         setAllHouse(json['houses'])
         setHouseID(json['houses'][0].ID)
       }
-  
-      getHouse()
 
+      getHouse()
     }
   }, [])
 

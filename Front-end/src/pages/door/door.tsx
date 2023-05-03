@@ -11,8 +11,18 @@ import AddLightModal from '../../components/Modal/LightModal/AddLight'
 import { getCookie } from '../../utilities/GetRoleCookie'
 import AddDoor from '../../components/Modal/DoorModal/AddDoor'
 
+
+interface Door {
+  ID: any
+  Devicename: string
+  Device_Status: string
+  Mode: string
+  Day_add: string
+  RoomID: any
+  Roomname: any
+}
 export default function Door() {
-  const [doorList, setDoorList] = React.useState('')
+  const [doorList, setDoorList] = React.useState<Door[]>([])
   const [status, setStatus] = React.useState('')
   const [idStatus, setIdStatus] = React.useState('')
   const [IdMode, setIdMode] = React.useState('')
@@ -34,21 +44,20 @@ export default function Door() {
   // get house
   const [userID, setUserID] = React.useState(getCookie('userID'))
   React.useEffect(() => {
-    if (userID){
+    if (userID) {
       const getHouse = async () => {
         const resp = await fetch(`http://localhost:3000/house/all/${userID}`)
-  
+
         if (!resp.ok) {
           alert('Something wrong')
         }
-  
+
         const json = await resp.json()
         setAllHouse(json['houses'])
         setHouseID(json['houses'][0].ID)
       }
-  
-      getHouse()
 
+      getHouse()
     }
   }, [])
 
@@ -84,7 +93,24 @@ export default function Door() {
           data: data,
         }
         const response = await axios(config)
+        if (response.status == 200) {
+          const devices = [...doorList]
+          const deviceToUpdate = devices.find(
+            (device) => device.ID === idStatus
+          )
+  
+          if (deviceToUpdate) {
+            deviceToUpdate.Device_Status =
+              deviceToUpdate.Device_Status === 'off' ? 'on' : 'off'
+            // console.log(devices)
+            setDoorList(devices)
+            // console.log(AirList)
+          } else {
+            console.log('abcd')
+          }
+        }
       }
+      
       updateStatus(idStatus)
     }
   }, [idStatus])
@@ -103,6 +129,17 @@ export default function Door() {
           data: data,
         }
         const response = await axios(config)
+        if (response.status == 200) {
+          const devices = [...doorList]
+          const deviceToUpdate = devices.find((device) => device.ID === IdMode)
+          if (deviceToUpdate) {
+            deviceToUpdate.Mode =
+              deviceToUpdate.Mode === 'manual' ? 'auto' : 'manual'
+            setDoorList(devices)
+          } else {
+            console.log('abcd')
+          }
+        }
       }
       updateStatus(IdMode)
     }
@@ -122,7 +159,11 @@ export default function Door() {
   }, [deleteId])
   return (
     <div className="contain">
-      <AddDoor displayModal={displayModal} setDisplayModal={setDisplayModal} houseID={houseID}></AddDoor>
+      <AddDoor
+        displayModal={displayModal}
+        setDisplayModal={setDisplayModal}
+        houseID={houseID}
+      ></AddDoor>
       <div className="contain_content">
         <div className="row2">
           <div className="row2_1">

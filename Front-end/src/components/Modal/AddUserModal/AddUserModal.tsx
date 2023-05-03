@@ -27,18 +27,17 @@ export default function AddUserModal(props: {
 
   React.useEffect(() => {
     const createNewUser = async () => {
-
       const data = JSON.stringify({
         SSN: ssn,
         Email: email,
         Phone: phone,
         Fname: firstName,
-        Lname : lastName,
+        Lname: lastName,
         Username: username,
         Pass: password,
-        District : district,
-        City : city ,
-        Role : "CU"
+        District: district,
+        City: city,
+        Role: 'CU',
       })
 
       const config = {
@@ -59,7 +58,6 @@ export default function AddUserModal(props: {
         setClick(false)
       }
     }
-    
   }, [click])
 
   return (
@@ -68,7 +66,7 @@ export default function AddUserModal(props: {
       setDisplayModal={props.setDisplayModal}
     >
       <div className="window grow p-4 ">
-         <div className="flex basis-1/2 gap-10">
+        <div className="flex basis-1/2 gap-10">
           <InputBlue
             label="First name"
             type="text"
@@ -76,54 +74,53 @@ export default function AddUserModal(props: {
             onChange={(e) => setFirstName(e.target.value)}
           ></InputBlue>
           <InputBlue
-          label="Last name"
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          ></InputBlue>
-        </div>
-        <InputBlue label="SSN" type="text" value={ssn}>
-        </InputBlue>
-          <InputBlue
-            label="Email"
+            label="Last name"
             type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></InputBlue>
-          <InputBlue
-            label="Contact number"
-            type="text"
-            value={phone}
+            value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           ></InputBlue>
+        </div>
+        <InputBlue label="SSN" type="text" value={ssn}></InputBlue>
+        <InputBlue
+          label="Email"
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        ></InputBlue>
+        <InputBlue
+          label="Contact number"
+          type="text"
+          value={phone}
+          onChange={(e) => setLastName(e.target.value)}
+        ></InputBlue>
         <div className="flex gap-5">
-            <InputBlue
-              label="District"
-              type="text"
-              value={district}
-              onChange={(e) => setDistric(e.target.value)}
-            ></InputBlue>
-            <InputBlue
-              label="City"
-              type="text"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            ></InputBlue>
-          </div>
-          <div className="flex gap-5">
-            <InputBlue
-              label="User name"
-              type="text"
-              value={username}
-              onChange={(e) => setDistric(e.target.value)}
-            ></InputBlue>
-            <InputBlue
-              label="Password"
-              type="text"
-              value={password}
-              onChange={(e) => setCity(e.target.value)}
-            ></InputBlue>
-          </div>
+          <InputBlue
+            label="District"
+            type="text"
+            value={district}
+            onChange={(e) => setDistric(e.target.value)}
+          ></InputBlue>
+          <InputBlue
+            label="City"
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          ></InputBlue>
+        </div>
+        <div className="flex gap-5">
+          <InputBlue
+            label="User name"
+            type="text"
+            value={username}
+            onChange={(e) => setDistric(e.target.value)}
+          ></InputBlue>
+          <InputBlue
+            label="Password"
+            type="text"
+            value={password}
+            onChange={(e) => setCity(e.target.value)}
+          ></InputBlue>
+        </div>
         <div className="Row">
           <RedButton
             onClick={() => {
@@ -141,7 +138,7 @@ export default function AddUserModal(props: {
               setClick(true)
             }}
           >
-            Add 
+            Add
           </BlueButton>
         </div>
       </div>

@@ -48,8 +48,7 @@ export default function login() {
           console.log(respone.data['UserID'])
           if (respone.data['role'] == 'CU') {
             navigate('/room')
-          }
-          else {
+          } else {
             navigate('/admin')
           }
         }
@@ -58,7 +57,6 @@ export default function login() {
       setClick(false)
     }
   }, [click])
-
 
   return (
     <div className="container_body">

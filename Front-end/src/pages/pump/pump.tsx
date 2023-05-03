@@ -11,9 +11,24 @@ import AddAir from '../../components/Modal/AirModal/AddAir'
 import AirUpdateAuto from '../../components/Modal/AirModal/AirUpdateAuto'
 import { getCookie } from '../../utilities/GetRoleCookie'
 import { useNavigate } from 'react-router-dom'
+import PumpUpdateAuto from '../../components/Modal/PumpModal/PumpUpdateAuto'
+
+interface Pump {
+  ID: any
+  Devicename: string
+  Device_Status: string
+  Mode: string
+  Day_add: string
+  RoomID: any
+  Temperature_D: any
+  Humidity_D: any
+  SensorID: any
+  Temperature: any
+  Humidity: any
+}
 
 export default function Pump() {
-  const [pumpList, setPumpList] = React.useState('')
+  const [pumpList, setPumpList] = React.useState<Pump[]>([])
 
   const [status, setStatus] = React.useState('')
   const [idStatus, setIdStatus] = React.useState('')
@@ -42,21 +57,20 @@ export default function Pump() {
 
   const [userID, setUserID] = React.useState(getCookie('userID'))
   React.useEffect(() => {
-    if (userID){
+    if (userID) {
       const getHouse = async () => {
         const resp = await fetch(`http://localhost:3000/house/all/${userID}`)
-  
+
         if (!resp.ok) {
           alert('Something wrong')
         }
-  
+
         const json = await resp.json()
         setAllHouse(json['houses'])
         setHouseID(json['houses'][0].ID)
       }
-  
-      getHouse()
 
+      getHouse()
     }
   }, [])
 
@@ -93,6 +107,7 @@ export default function Pump() {
         }
         const response = await axios(config)
       }
+      console.log(idStatus)
       updateStatus(idStatus)
     }
   }, [idStatus])
@@ -111,24 +126,34 @@ export default function Pump() {
           data: data,
         }
         const response = await axios(config)
+        if (response.status == 200) {
+          const devices = [...pumpList]
+          const deviceToUpdate = devices.find((device) => device.ID === IdMode)
+          if (deviceToUpdate) {
+            deviceToUpdate.Mode =
+              deviceToUpdate.Mode === 'manual' ? 'auto' : 'manual'
+            setPumpList(devices)
+          } else {
+            console.log('abcd')
+          }
+        }
       }
       updateStatus(IdMode)
     }
   }, [IdMode])
 
-  // delete aircondition
-  // React.useEffect(() => {
-  //   if (deleteId) {
-  //     async function deleteLight() {
-  //       await fetch(`http://localhost:3000/pump/${deleteId}`, {
-  //         method: 'DELETE',
-  //       })
-  //     }
+  React.useEffect(() => {
+    if (deleteId) {
+      async function deleteLight() {
+        await fetch(`http://localhost:3000/pump/${deleteId}`, {
+          method: 'DELETE',
+        })
+      }
 
-  //     console.log('DELETE DEVICE')
-  //     deleteLight()
-  //   }
-  // }, [deleteId])
+      console.log('DELETE DEVICE')
+      deleteLight()
+    }
+  }, [deleteId])
   return (
     <div className="contain">
       <div className="contain_content">
@@ -161,6 +186,7 @@ export default function Pump() {
               {Array.isArray(allHouse) && allHouse.length > 0 ? (
                 allHouse.map((option) => (
                   <option
+                    key={option['ID']}
                     value={option['ID']}
                     onClick={() => {
                       console.log(option['ID'])
@@ -247,7 +273,7 @@ export default function Pump() {
                 ))}
             </tbody>
           </Table>
-          <AirUpdateAuto
+          <PumpUpdateAuto
             airId={updateEnvID}
             temperature={temprature}
             humidity={humidity}

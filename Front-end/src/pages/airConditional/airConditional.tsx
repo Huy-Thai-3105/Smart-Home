@@ -56,21 +56,20 @@ export default function AirConditional() {
   // get house
   const [userID, setUserID] = React.useState(getCookie('userID'))
   React.useEffect(() => {
-    if (userID){
+    if (userID) {
       const getHouse = async () => {
         const resp = await fetch(`http://localhost:3000/house/all/${userID}`)
-  
+
         if (!resp.ok) {
           alert('Something wrong')
         }
-  
+
         const json = await resp.json()
         setAllHouse(json['houses'])
         setHouseID(json['houses'][0].ID)
       }
-  
-      getHouse()
 
+      getHouse()
     }
   }, [])
 
@@ -108,6 +107,7 @@ export default function AirConditional() {
         }
 
         getAirCondition(houseID)
+        // console.log(AirList)
       }
     }, 5000) // Call the function every 5 seconds
 
@@ -140,7 +140,7 @@ export default function AirConditional() {
               deviceToUpdate.Device_Status === 'off' ? 'on' : 'off'
             // console.log(devices)
             setAirList(devices)
-            console.log(AirList)
+            // console.log(AirList)
           } else {
             console.log('abcd')
           }
@@ -164,13 +164,12 @@ export default function AirConditional() {
           data: data,
         }
         const response = await axios(config)
-         if (response.status == 200) {
+        if (response.status == 200) {
           const devices = [...AirList]
-          const deviceToUpdate = devices.find(
-            (device) => device.ID === IdMode
-          )
+          const deviceToUpdate = devices.find((device) => device.ID === IdMode)
           if (deviceToUpdate) {
-            deviceToUpdate.Mode = deviceToUpdate.Mode === 'manual' ? 'auto' : 'manual'
+            deviceToUpdate.Mode =
+              deviceToUpdate.Mode === 'manual' ? 'auto' : 'manual'
             setAirList(devices)
           } else {
             console.log('abcd')
@@ -179,7 +178,7 @@ export default function AirConditional() {
       }
       updateStatus(IdMode)
     }
-  }, [IdMode,mode])
+  }, [IdMode, mode])
 
   // delete aircondition
   React.useEffect(() => {
@@ -264,7 +263,6 @@ export default function AirConditional() {
                 <th>Code</th>
                 <th>Temprature </th>
                 <th>Humidity</th>
-                <th>User</th>
                 <th>Status</th>
                 <th>Mode</th>
                 <th>Remove</th>
@@ -308,7 +306,6 @@ export default function AirConditional() {
                     ) : (
                       <td className="color_blue"> {info.Humidity}</td>
                     )}
-                    <td>Thái</td>
                     <td
                       onClick={() => {
                         setIdStatus(info.ID)
