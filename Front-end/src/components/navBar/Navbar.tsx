@@ -2,22 +2,33 @@ import React, { useState } from 'react'
 import './navbar.css'
 import { To, useNavigate } from 'react-router-dom'
 
-export default function Navbar({ name, src, link }) {
-  const [active, setActive] = React.useState(false)
-  //const [path, setPath] = React.useState(link)
+export default function Navbar({ name, src, link, active, setActive }) {
+  const tmp = window.location.pathname
   const toggleActive = () => {
-    setActive(!active)
+    let a = {
+      '/room': 0,
+      '/light': 0,
+      '/air': 0,
+      '/door':0,
+      '/pump': 0,
+      '/account': 0
+    }
+    a[link] = 1
+    setActive(a)  
   }
 
   let navigate = useNavigate()
   const routeChange = () => {
     navigate(link)
   }
-
+  console.log(tmp)
+  console.log(link)
+  
+  console.log(active[tmp])
   return (
     <div
-      className={!active ? 'contain_element' : 'contain_element_active'}
-      // onClick={toggleActive}
+      className={(active[tmp] === 1 && tmp === link) ? 'contain_element_active' : 'contain_element'}
+      onClick={toggleActive}
     >
       <div
         className="nav"

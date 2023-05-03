@@ -109,7 +109,7 @@ export default function AirConditional() {
 
         getAirCondition(houseID)
       }
-    }, 5000) // Call the function every 5 seconds
+    }, 100000) // Call the function every 5 seconds
 
     return () => clearInterval(intervalId)
   }, [houseID])
