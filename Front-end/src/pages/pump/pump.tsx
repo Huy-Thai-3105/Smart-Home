@@ -46,7 +46,7 @@ export default function Pump() {
 
   const [allHouse, setAllHouse] = React.useState([])
 
-  const [numAirOn, setnumAirOn] = React.useState(0)
+  const [numPumpOn, setnumPumpOn] = React.useState(0)
   // get house
 
   const [role, setRole] = useState(getCookie('role'))
@@ -74,11 +74,29 @@ export default function Pump() {
     }
   }, [])
 
-  // get device in house
+  // // get device in house
+  // React.useEffect(() => {
+  //   if (houseID) {
+  //     const getALlPump = async (houseID) => {
+  //       const resp = await fetch(`http://localhost:3000/pump/all/${houseID}`)
+
+  //       if (!resp.ok) {
+  //         alert('Something wrong')
+  //       }
+
+  //       const json = await resp.json()
+  //       if (json['result'] == 'success') setPumpList(json['pumps'])
+  //     }
+  //     getALlPump(houseID)
+  //   }
+  // }, [houseID])
+
   React.useEffect(() => {
     if (houseID) {
-      const getAirConditon = async (houseID) => {
-        const resp = await fetch(`http://localhost:3000/pump/all/${houseID}`)
+      const getPumpList = async (houseID) => {
+        const resp = await fetch(
+          `http://localhost:3000/pump/all/${houseID}`
+        )
 
         if (!resp.ok) {
           alert('Something wrong')
@@ -86,11 +104,39 @@ export default function Pump() {
 
         const json = await resp.json()
         if (json['result'] == 'success') setPumpList(json['pumps'])
+      //   setnumPumpOn(
+      //     json['pumps'].filter((air: any) => air.Device_Status == 'on').length
+      //   )
       }
-      getAirConditon(houseID)
-    }
-  }, [houseID])
 
+      getPumpList(houseID)
+    }
+    const intervalId = setInterval(() => {
+      if (houseID) {
+        const getPumpList = async (houseID) => {
+          const resp = await fetch(
+            `http://localhost:3000/pump/all/${houseID}`
+          )
+
+          if (!resp.ok) {
+            alert('Something wrong')
+          }
+
+          const json = await resp.json()
+          if (json['result'] == 'success') setPumpList(json['pumps'])
+          setnumPumpOn(
+            json['pumps'].filter((light: any) => light.Device_Status == 'on')
+              .length
+          )
+        }
+
+        getPumpList(houseID)
+        // console.log(AirList)
+      }
+    }, 5000) // Call the function every 5 seconds
+
+    return () => clearInterval(intervalId)
+  }, [houseID])
   // turn on/off device
   React.useEffect(() => {
     if (idStatus) {
@@ -190,7 +236,7 @@ export default function Pump() {
               </nav>
             </div>
           </div>
-          <div className="line">Pump is running: {numAirOn}</div>
+          <div className="line">Pump is running: {numPumpOn}</div>
           <div className="row2_1">
             <select
               className="border-blue-gray-200 text-blue-gray-700 placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 disabled:bg-blue-gray-50 select_size peer h-full w-full rounded-[7px] border border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal shadow-md outline outline-0 transition-all placeholder-shown:border empty:!bg-red-500 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0"
