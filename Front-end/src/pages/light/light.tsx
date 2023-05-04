@@ -158,35 +158,35 @@ export default function Light() {
     }
   }, [idStatus, status])
 
-  React.useEffect(() => {
-    if (IdMode) {
-      const updateStatus = async (IdMode: any) => {
-        const data = {
-          Mode: mode,
-        }
-        // console.log(data)
-        // alert(IdMode)
-        const config = {
-          method: 'patch',
-          url: `http://localhost:3000/device/${IdMode}`,
-          data: data,
-        }
-        const response = await axios(config)
-        if (response.status == 200) {
-          const devices = [...lightList]
-          const deviceToUpdate = devices.find((device) => device.ID === IdMode)
-          if (deviceToUpdate) {
-            deviceToUpdate.Mode =
-              deviceToUpdate.Mode === 'manual' ? 'auto' : 'manual'
-            setLightList(devices)
-          } else {
-            console.log('abcd')
-          }
-        }
-      }
-      updateStatus(IdMode)
-    }
-  }, [IdMode, mode])
+  // React.useEffect(() => {
+  //   if (IdMode) {
+  //     const updateStatus = async (IdMode: any) => {
+  //       const data = {
+  //         Mode: mode,
+  //       }
+  //       // console.log(data)
+  //       // alert(IdMode)
+  //       const config = {
+  //         method: 'patch',
+  //         url: `http://localhost:3000/device/${IdMode}`,
+  //         data: data,
+  //       }
+  //       const response = await axios(config)
+  //       if (response.status == 200) {
+  //         const devices = [...lightList]
+  //         const deviceToUpdate = devices.find((device) => device.ID === IdMode)
+  //         if (deviceToUpdate) {
+  //           deviceToUpdate.Mode =
+  //             deviceToUpdate.Mode === 'manual' ? 'auto' : 'manual'
+  //           setLightList(devices)
+  //         } else {
+  //           console.log('abcd')
+  //         }
+  //       }
+  //     }
+  //     updateStatus(IdMode)
+  //   }
+  // }, [IdMode, mode])
 
   React.useEffect(() => {
     if (deleteId) {
@@ -289,7 +289,6 @@ export default function Light() {
                 <th>Room name</th>
                 <th>Day Add</th>
                 <th>Status</th>
-                <th>Auto Mode</th>
                 <th>Remove</th>
               </tr>
             </thead>
@@ -300,17 +299,17 @@ export default function Light() {
                     <td className="color_blue">{info.Devicename}</td>
                     <td>{info.ID}</td>
                     <td>{info.Roomname}</td>
-                    <td>03-08-2023</td>
+                    <td>{new Date(Date.parse(info.Day_add)).toLocaleString('en-US')}</td>
                     <td
-                      onClick={() => {
-                        setIdStatus(info.ID)
-                        if (info.Device_Status === 'on') setStatus('off')
-                        else setStatus('on')
-                      }}
+                      // onClick={() => {
+                      //   setIdStatus(info.ID)
+                      //   if (info.Device_Status === 'on') setStatus('off')
+                      //   else setStatus('on')
+                      // }}
                     >
                       <Toggle toggled={info.Device_Status} onClick={true} />
                     </td>
-                    <td
+                    {/* <td
                       onClick={() => {
                         setIdMode(info.ID)
                         if (info.Mode == 'auto') setMode('manual')
@@ -318,7 +317,7 @@ export default function Light() {
                       }}
                     >
                       <Toggle toggled={info.Mode} onClick={true} />
-                    </td>
+                    </td> */}
                     <td
                       className="pointer"
                       onClick={() => {

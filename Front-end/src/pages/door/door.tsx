@@ -62,6 +62,22 @@ export default function Door() {
   }, [])
 
   // get device in house
+  // React.useEffect(() => {
+  //   if (houseID) {
+  //     const getDoorList = async (houseID) => {
+  //       const resp = await fetch(`http://localhost:3000/door/all/${houseID}`)
+
+  //       if (!resp.ok) {
+  //         alert('Something wrong')
+  //       }
+
+  //       const json = await resp.json()
+  //       if (json['result'] == 'success') setDoorList(json['doors'])
+  //     }
+  //     getDoorList(houseID)
+  //   }
+  // }, [houseID])
+
   React.useEffect(() => {
     if (houseID) {
       const getDoorList = async (houseID) => {
@@ -73,10 +89,39 @@ export default function Door() {
 
         const json = await resp.json()
         if (json['result'] == 'success') setDoorList(json['doors'])
+        setNumDoorOpen(
+          json['doors'].filter((door: any) => door.Device_Status == 'on').length
+        )
       }
       getDoorList(houseID)
     }
+    const intervalId = setInterval(() => {
+      if (houseID) {
+        const getDoorList = async (houseID) => {
+          const resp = await fetch(
+            `http://localhost:3000/door/all/${houseID}`
+          )
+
+          if (!resp.ok) {
+            alert('Something wrong')
+          }
+
+          const json = await resp.json()
+          if (json['result'] == 'success') setNumDoorOpen(json['doors'])
+          setNumDoorOpen(
+            json['doors'].filter((light: any) => light.Device_Status == 'on')
+              .length
+          )
+        }
+
+        getDoorList(houseID)
+        // console.log(AirList)
+      }
+    }, 5000) // Call the function every 5 seconds
+
+    return () => clearInterval(intervalId)
   }, [houseID])
+
 
   // turn on/off device
   React.useEffect(() => {
@@ -113,7 +158,7 @@ export default function Door() {
       
       updateStatus(idStatus)
     }
-  }, [idStatus])
+  }, [idStatus,status])
 
   // turn on/off auto mode
   React.useEffect(() => {
@@ -143,7 +188,7 @@ export default function Door() {
       }
       updateStatus(IdMode)
     }
-  }, [IdMode])
+  }, [IdMode,mode])
 
   React.useEffect(() => {
     if (deleteId) {
@@ -233,7 +278,6 @@ export default function Door() {
               </tr>
             </thead>
             <tbody>
-              {}
               {Array.isArray(doorList) &&
                 doorList.map((info) => (
                   <tr key={info.ID}>
@@ -241,7 +285,7 @@ export default function Door() {
 
                     <td>{info.ID}</td>
                     <td>{info.Roomname}</td>
-                    <td>03-08-2023</td>
+                    <td>{new Date(Date.parse(info.Day_add)).toLocaleString('en-US')}</td>
                     <td
                       onClick={() => {
                         setIdStatus(info.ID)

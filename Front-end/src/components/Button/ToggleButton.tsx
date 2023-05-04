@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import './ToggleButton.css'
 export const Toggle = ({ toggled, onClick }) => {
   const [isToggled, setToogled] = React.useState(false)
-  console.log(isToggled)
   React.useEffect(() => {
     if (toggled == 'on' || toggled == 'auto') setToogled(true)
     else {

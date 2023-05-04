@@ -94,6 +94,7 @@ export default function Pump() {
   // turn on/off device
   React.useEffect(() => {
     if (idStatus) {
+      console.log(status)
       const updateStatus = async (idStatus) => {
         const data = {
           Devicename: '',
@@ -106,11 +107,24 @@ export default function Pump() {
           data: data,
         }
         const response = await axios(config)
+        if (response.status == 200) {
+          const devices = [...pumpList]
+          const deviceToUpdate = devices.find(
+            (device) => device.ID === idStatus
+          )
+
+          if (deviceToUpdate) {
+            deviceToUpdate.Device_Status = deviceToUpdate.Device_Status === 'off' ? 'on' : 'off'
+            // console.log(devices)
+            setPumpList(devices)
+          } else {
+            console.log('abcd')
+          }
+        }
       }
-      console.log(idStatus)
       updateStatus(idStatus)
     }
-  }, [idStatus])
+  }, [idStatus, status])
 
   // turn on/off auto mode
   React.useEffect(() => {
@@ -140,7 +154,7 @@ export default function Pump() {
       }
       updateStatus(IdMode)
     }
-  }, [IdMode])
+  }, [IdMode,mode])
 
   React.useEffect(() => {
     if (deleteId) {

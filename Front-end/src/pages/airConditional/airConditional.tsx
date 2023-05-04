@@ -116,7 +116,7 @@ export default function AirConditional() {
         getAirCondition(houseID)
         // console.log(AirList)
       }
-    }, 100000) // Call the function every 5 seconds
+    }, 5000) // Call the function every 5 seconds
 
     return () => clearInterval(intervalId)
   }, [houseID])
@@ -124,6 +124,7 @@ export default function AirConditional() {
 
   React.useEffect(() => {
     if (idStatus) {
+      console.log(status)
       const updateStatus = async (idStatus) => {
         const data = {
           Devicename: '',
@@ -143,11 +144,10 @@ export default function AirConditional() {
           )
 
           if (deviceToUpdate) {
-            deviceToUpdate.Device_Status =
-              deviceToUpdate.Device_Status === 'off' ? 'on' : 'off'
+            deviceToUpdate.Device_Status = deviceToUpdate.Device_Status === 'off' ? 'on' : 'off'
             // console.log(devices)
             setAirList(devices)
-            // console.log(AirList)
+            console.log(AirList)
           } else {
             console.log('abcd')
           }
@@ -164,7 +164,6 @@ export default function AirConditional() {
         const data = {
           Mode: mode,
         }
-        console.log(data)
         const config = {
           method: 'patch',
           url: `http://localhost:3000/device/${IdMode}`,
@@ -242,9 +241,6 @@ export default function AirConditional() {
                 allHouse.map((option) => (
                   <option
                     value={option['ID']}
-                    onClick={() => {
-                      console.log(option['ID'])
-                    }}
                   >
                     {option['Housename']}
                   </option>
