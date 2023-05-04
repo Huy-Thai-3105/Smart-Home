@@ -4,6 +4,7 @@ import BlueButton from '../../Button/BlueButton'
 import InputBlue from '../../InputBox/InputBlue'
 import RedButton from '../../Button/RedButton'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function RoomModal(props: {
   displayModal: boolean
@@ -38,6 +39,12 @@ export default function RoomModal(props: {
         const respone = await axios(config)
         if (respone['mesage'] == 'id not exist or something wrong happened') {
           alert('Light code is existed')
+        }
+        else {
+          Swal.fire(
+            'Add success'
+          )
+          window.location.reload()
         }
       }
       if (click === true) {

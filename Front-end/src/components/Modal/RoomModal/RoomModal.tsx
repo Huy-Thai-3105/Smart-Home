@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import Form from '../../Form/Form'
-import BlueButton from '../../Button/BlueButton'
-import InputBlue from '../../InputBox/InputBlue'
 import RedButton from '../../Button/RedButton'
-import axios from 'axios'
 import Table from '../../Table/Table'
+import Swal from 'sweetalert2'
 
 export default function RoomModal(props: {
   displayModal: boolean
@@ -43,7 +41,11 @@ export default function RoomModal(props: {
           method: 'DELETE',
         })
       }
-      console.log('DELETE DEVICE', { roomID })
+      Swal.fire(
+        'Delete success'
+      )
+      window.location.reload()
+      console.log('DELETE Room', { roomID })
       deleteRoom()
     }
   }, [click])
@@ -83,7 +85,6 @@ export default function RoomModal(props: {
           <thead>
             <tr>
               <th>ID</th>
-              {/* <th>Light </th> */}
               <th>Device name</th>
               <th>Device Status</th>
               <th>Auto</th>

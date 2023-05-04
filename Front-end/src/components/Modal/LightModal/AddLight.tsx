@@ -5,6 +5,7 @@ import InputBlue from '../../InputBox/InputBlue'
 import RedButton from '../../Button/RedButton'
 import axios from 'axios'
 import Light from '../../../pages/light/light'
+import Swal from 'sweetalert2'
 
 export default function ModalCreate(props: {
   displayModal: boolean
@@ -67,6 +68,11 @@ export default function ModalCreate(props: {
       const respone = await axios(config)
       if (respone['mesage'] == 'id not exist or something wrong happened') {
         alert('Light code is existed')
+      }
+      else {
+        Swal.fire(
+          'Add success'
+        )
       }
     }
     if (click === true) {

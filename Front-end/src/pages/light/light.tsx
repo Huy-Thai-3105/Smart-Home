@@ -11,6 +11,7 @@ import AddLightModal from '../../components/Modal/LightModal/AddLight'
 import { CredentialsInterface, UserContext } from '../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { getCookie } from '../../utilities/GetRoleCookie'
+import Swal from 'sweetalert2'
 
 interface Light {
   ID: any
@@ -197,7 +198,9 @@ export default function Light() {
       const devices = [...lightList]
 
       setLightList(devices.filter((device) => device.ID !== deleteId))
-      console.log('DELETE DEVICE')
+      Swal.fire(
+        'Delete success'
+      )
       deleteLight()
     }
   }, [deleteId])

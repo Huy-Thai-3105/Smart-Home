@@ -4,8 +4,7 @@ import BlueButton from '../../Button/BlueButton'
 import InputBlue from '../../InputBox/InputBlue'
 import RedButton from '../../Button/RedButton'
 import axios from 'axios'
-import Input_nomal from '../../InputBox/input_nomal'
-
+import Swal from 'sweetalert2'
 export default function AddUserModal(props: {
   displayModal: boolean
   setDisplayModal: any
@@ -24,6 +23,7 @@ export default function AddUserModal(props: {
   const [city, setCity] = React.useState('')
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const [role, setRole] = React.useState('AD')
 
   React.useEffect(() => {
     const createNewUser = async () => {
@@ -37,7 +37,7 @@ export default function AddUserModal(props: {
         Pass: password,
         District: district,
         City: city,
-        Role: 'CU',
+        Role: role,
       })
 
       const config = {
@@ -48,18 +48,27 @@ export default function AddUserModal(props: {
         },
         data: data,
       }
-
+      console.log(data)
       const respone = await axios(config)
+      if (respone.status == 200) {
+        Swal.fire(
+          'success'
+        )
+      }
     }
     if (click === true) {
-      if (id == '' || name == '') alert('please enter all infomation')
+      if ( username == '' || password == ''){
+        Swal.fire(
+          'please enter all infomation'
+        )
+      } 
       else {
         createNewUser()
         setClick(false)
       }
     }
   }, [click])
-
+  console.log(role)
   return (
     <Form
       displayModal={props.displayModal}
@@ -80,7 +89,24 @@ export default function AddUserModal(props: {
             onChange={(e) => setLastName(e.target.value)}
           ></InputBlue>
         </div>
-        <InputBlue label="SSN" type="text" value={ssn}></InputBlue>
+        <select
+              className="border-blue-gray-200 text-blue-gray-700 placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 disabled:bg-blue-gray-50 select_size peer h-full w-full rounded-[7px] border border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal shadow-md outline outline-0 transition-all placeholder-shown:border empty:!bg-red-500 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+                  <option
+                    value={"AD"}
+                  >Admin</option>
+                  <option
+                    value={"CU"}
+                  >Customer</option>
+            </select>
+        <InputBlue 
+          label="SSN"
+          type="text"
+          value={ssn}
+          onChange={(e) => setSSN(e.target.value)}
+        ></InputBlue>
         <InputBlue
           label="Email"
           type="text"
@@ -91,7 +117,7 @@ export default function AddUserModal(props: {
           label="Contact number"
           type="text"
           value={phone}
-          onChange={(e) => setLastName(e.target.value)}
+          onChange={(e) => setPhone(e.target.value)}
         ></InputBlue>
         <div className="flex gap-5">
           <InputBlue
@@ -112,15 +138,16 @@ export default function AddUserModal(props: {
             label="User name"
             type="text"
             value={username}
-            onChange={(e) => setDistric(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           ></InputBlue>
           <InputBlue
             label="Password"
             type="text"
             value={password}
-            onChange={(e) => setCity(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           ></InputBlue>
         </div>
+
         <div className="Row">
           <RedButton
             onClick={() => {

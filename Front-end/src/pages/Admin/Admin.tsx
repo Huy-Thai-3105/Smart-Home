@@ -73,7 +73,6 @@ export default function Admin() {
               <th>Username</th>
               <th>Password</th>
               <th>Role</th>
-
               <th>Remove</th>
             </tr>
           </thead>

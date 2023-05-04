@@ -11,6 +11,7 @@ import AddAir from '../../components/Modal/AirModal/AddAir'
 import AirUpdateAuto from '../../components/Modal/AirModal/AirUpdateAuto'
 import { useNavigate } from 'react-router-dom'
 import { getCookie } from '../../utilities/GetRoleCookie'
+import Swal from 'sweetalert2'
 
 interface AirDevice {
   ID: any
@@ -197,6 +198,9 @@ export default function AirConditional() {
       const devices = [...AirList]
 
       setAirList(devices.filter((device) => device.ID !== deleteId))
+      Swal.fire(
+        'Delete success'
+      )
       console.log('DELETE DEVICE')
       deleteLight()
     }
