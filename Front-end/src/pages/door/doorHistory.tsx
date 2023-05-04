@@ -12,7 +12,7 @@ function convertToMinutesAndSeconds(seconds) {
     .padStart(2, '0')}`
 }
 
-export default function LightHistory() {
+export default function DoorHistory() {
   const [dataHis, setDataHis] = React.useState([])
   const [allHouse, setAllHouse] = React.useState([])
   const [houseID, setHouseID] = React.useState('')
@@ -73,18 +73,18 @@ export default function LightHistory() {
             <nav>
               <ul className="list">
                 <li className="items">
-                  <a href="./light">Device</a>
+                  <a href="./door">Device</a>
                 </li>
                 <li className="items">History</li>
                 <li className="items">
-                  <a href="./lightChart">Dashboard</a>
+                  <a href="./doorChart">Dashboard</a>
                 </li>
               </ul>
             </nav>
           </div>
         </div>
         <div className="row2_1">
-          <p className="line"> Number light is on : </p>
+          <p className="line"> Number Door is on : </p>
         </div>
         <div className="flex w-full">
           <select

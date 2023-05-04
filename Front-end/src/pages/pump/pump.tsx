@@ -129,9 +129,7 @@ export default function Pump() {
               .length
           )
         }
-
         getPumpList(houseID)
-        // console.log(AirList)
       }
     }, 5000) // Call the function every 5 seconds
 

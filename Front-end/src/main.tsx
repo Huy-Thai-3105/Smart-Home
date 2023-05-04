@@ -19,6 +19,8 @@ import PumpHistory from './pages/pump/pumpHistory'
 import PumpChart from './pages/pump/pumpDashboard'
 import UserProvider, { UserContext } from './context/UserContext'
 import Admin from './pages/Admin/Admin'
+import DoorHistory from './pages/door/doorHistory'
+import DoorDashboard from './pages/door/doorDashboard'
 
 // import AitHistory from './pages/airConditional/'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -37,10 +39,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             <Route path="/airHistory" element={<AirHistory />}></Route>
             <Route path="/airChart" element={<AirDashboard />}></Route>
             <Route path="/door" element={<Door />}></Route>
+            <Route path="/doorHistory" element={<DoorHistory />}></Route>
+            <Route path="/doorChart" element={<DoorDashboard />}></Route>
             <Route path="/pump" element={<Pump />}></Route>
             <Route path="/pumpHistory" element={<PumpHistory />}></Route>
             <Route path="/pumpChart" element={<PumpChart />}></Route>
-
             <Route path="/account" element={<Account />}></Route>
           </Route>
         </Routes>

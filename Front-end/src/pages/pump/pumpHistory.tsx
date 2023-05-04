@@ -31,7 +31,7 @@ export default function PumpHistory() {
     if (houseID) {
       const getHistory = async (houseID) => {
         const resp = await fetch(
-          `http://localhost:3000/device/history/all/Air_Condition/${houseID}`
+          `http://localhost:3000/device/history/all/Water_pumps/${houseID}`
         )
 
         if (!resp.ok) {
