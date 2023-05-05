@@ -21,6 +21,8 @@ export default function login() {
   const navigate = useNavigate()
 
   React.useEffect(() => {
+    let controller = new AbortController();
+    const signal = controller.signal;
     if (userName != '' && password != '') {
       const handleLogin = async () => {
         const data = JSON.stringify({
@@ -31,6 +33,7 @@ export default function login() {
         const config = {
           method: 'post',
           url: 'http://localhost:3000/auth/login',
+          signal: signal,
           headers: {
             'Content-Type': 'application/json',
           },
@@ -38,6 +41,18 @@ export default function login() {
         }
 
         const respone = await axios(config)
+        setAccessToken(respone.data['accessToken'])
+          setUserRole(respone.data['role'])
+          setRefreshToken(respone.data['refreshToken'])
+          setUserId(respone.data['UserID'])
+          console.log(respone.data['UserID'])
+          if (respone.data['role'] == 'CU') {
+            console.log("abcd")
+            navigate('/room')
+          } else {
+            console.log(respone.data["role"])
+            navigate('/admin')
+          }
         if (respone.status != 200) {
           alert('invalid Input')
         } else {
@@ -47,8 +62,10 @@ export default function login() {
           setUserId(respone.data['UserID'])
           console.log(respone.data['UserID'])
           if (respone.data['role'] == 'CU') {
+            console.log("abcd")
             navigate('/room')
           } else {
+            console.log(respone.data["role"])
             navigate('/admin')
           }
         }
